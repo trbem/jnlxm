@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.egg-info/
+*.egg
+dist/
+build/
+*.pyc
+
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+
+# 上传的文件
+uploads/
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.gif
+
+# 日志文件
+logs/
+*.log
+
+# 环境变量
+.env
+.env.local
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ESP32 固件构建文件
+firmware/build/
+firmware/output.bin
+firmware/sdkconfig.old
+firmware/dependencies.lock
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# 前端构建产物
+frontend/dist/
+frontend/.vite/
+
+# 临时文件
+*.tmp
+*.temp
+*~
+
+# 配置文件（包含敏感信息）
+backend/.env

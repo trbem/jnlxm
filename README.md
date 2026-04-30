@@ -64,10 +64,7 @@ jnjxm/
 │   └── firmware_requirements.md  # ESP32 固件需求文档
 ├── web/
 │   └── index.html            # 前端网页界面
-└── house_price_model/        # 房价预测模型（可选）
-    ├── clean_dataset.py
-    ├── predict_test.py
-    └── train_model.py
+
 ```
 
 ## 🚀 快速开始

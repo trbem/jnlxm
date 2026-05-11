@@ -4,7 +4,7 @@
  * 功能：
  * 1. 连接WiFi (SSID: 431)
  * 2. 通过SNTP获取NTP实时时间
- * 3. 每30秒将时间信息上报到局域网服务器 http://10.1.41.99:8085
+ * 3. 提供HTTP服务器，手机浏览器访问ESP的IP查看时间
  */
 
 #include <string.h>
@@ -19,9 +19,9 @@
 #include "esp_event.h"
 #include "esp_log.h"
 #include "esp_netif.h"
-#include "esp_netif_sntp.h"
-#include "esp_http_client.h"
+#include "esp_http_server.h"
 #include "nvs_flash.h"
+#include "lwip/apps/sntp.h"
 
 static const char *TAG = "time_fetcher";
 static const char *HTTP_TAG = "reporter";
@@ -40,17 +40,18 @@ static const char *ntp_servers[] = {
     "time.windows.com",
     "cn.pool.ntp.org"
 };
-#define NTP_SERVER_COUNT (sizeof(ntp_servers) / sizeof(ntp_servers[0]))
+
+/* HTTP服务器句柄 */
+static httpd_handle_t server = NULL;
 
 /* 函数声明 */
 static void wifi_init_sta(void);
-static void obtain_time(void);
-static void report_time_to_server(void);
 static void wifi_event_handler(void *arg, esp_event_base_t event_base,
                                int32_t event_id, void *event_data);
 static void ip_event_handler(void *arg, esp_event_base_t event_base,
                              int32_t event_id, void *event_data);
-static bool is_time_synced(void);
+static void start_http_server(void);
+static void print_time_callback(TimerHandle_t xTimer);
 
 /* WiFi初始化 - Station模式 */
 static void wifi_init_sta(void)
@@ -76,7 +77,7 @@ static void wifi_init_sta(void)
                                                         NULL,
                                                         NULL));
 
-    /* 配置WiFi - 使用纯WPA2认证模式 */
+    /* 配置WiFi */
     wifi_config_t wifi_config = {
         .sta = {
             .ssid = "431",
@@ -88,9 +89,6 @@ static void wifi_init_sta(void)
             },
         },
     };
-
-    /* 打印配置的SSID用于调试 */
-    ESP_LOGI(TAG, "Configured SSID: '%s'", wifi_config.sta.ssid);
 
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));
@@ -142,126 +140,87 @@ static void ip_event_handler(void *arg, esp_event_base_t event_base,
     ESP_LOGI(TAG, "Got IP: " IPSTR, IP2STR(&event->ip_info.ip));
     s_retry_num = 0;
     xEventGroupSetBits(s_wifi_event_group, WIFI_CONNECTED_BIT);
+    
+/* WiFi连接成功后配置SNTP */
+    ESP_LOGI(TAG, "Configuring SNTP...");
+    sntp_setoperatingmode(0);  /* 使用客户端模式 */
+    sntp_setservername(0, ntp_servers[0]);
+    sntp_setservername(1, ntp_servers[1]);
+    sntp_setservername(2, ntp_servers[2]);
+    sntp_init();
+    ESP_LOGI(TAG, "SNTP configured, time will be synced automatically");
 }
 
-/* 检查时间是否已同步 */
-static bool is_time_synced(void)
+/* HTTP根路径处理器 */
+static esp_err_t root_get_handler(httpd_req_t *req)
 {
     time_t now;
     struct tm timeinfo = {0};
+    char time_str[64];
+    char ip_str[32];
+    
     time(&now);
     localtime_r(&now, &timeinfo);
+    strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", &timeinfo);
     
-    /* 如果tm_year小于(2024-1900)，说明时间还未设置(仍是1970年) */
-    return timeinfo.tm_year >= (2024 - 1900);
-}
-
-/* 初始化SNTP */
-static void initialize_sntp(void)
-{
-    ESP_LOGI(TAG, "Initializing SNTP");
+    const char *weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", 
+                              "Thursday", "Friday", "Saturday"};
     
-    /* ESP-IDF v5.4使用ESP_NETIF_SNTP_DEFAULT_CONFIG_MULTIPLE配置多个NTP服务器 */
-    esp_sntp_config_t config = ESP_NETIF_SNTP_DEFAULT_CONFIG_MULTIPLE(
-        NTP_SERVER_COUNT,
-        ESP_SNTP_SERVER_LIST(ntp_servers[0], ntp_servers[1]));
+    /* 获取服务器IP地址 */
+    esp_netif_ip_info_t ip_info;
+    esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
+    esp_netif_get_ip_info(netif, &ip_info);
+    snprintf(ip_str, sizeof(ip_str), IPSTR, IP2STR(&ip_info.ip));
     
-    config.start = true;  /* 自动启动SNTP服务 */
+    /* 构建HTML响应 */
+    char response[1024];
+    snprintf(response, sizeof(response),
+             "<!DOCTYPE html>"
+             "<html>"
+             "<head>"
+             "<meta charset=\"UTF-8\">"
+             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+             "<title>ESP32-S3-EYE 时间上报</title>"
+             "<style>"
+             "body { font-family: Arial, sans-serif; margin: 50px; background: #f5f5f5; }"
+             ".container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }"
+             "h1 { color: #333; }"
+             ".time { font-size: 24px; color: #007bff; margin: 20px 0; }"
+             ".info { margin: 10px 0; color: #666; }"
+             "</style>"
+             "</head>"
+             "<body>"
+             "<div class=\"container\">"
+             "<h1>ESP32-S3-EYE 时间上报</h1>"
+             "<div class=\"time\">当前时间: %s</div>"
+             "<div class=\"info\">时区: Asia/Shanghai (CST-8)</div>"
+             "<div class=\"info\">星期: %s</div>"
+             "<div class=\"info\">IP地址: %s</div>"
+             "</div>"
+             "</body>"
+             "</html>",
+             time_str,
+             weekdays[timeinfo.tm_wday],
+             ip_str);
     
-    esp_netif_sntp_init(&config);
-}
-
-/* 获取时间 - 等待NTP同步完成 */
-static void obtain_time(void)
-{
-    if (!s_wifi_connected) {
-        ESP_LOGW(TAG, "WiFi not connected, skipping time sync");
-        return;
-    }
-
-    initialize_sntp();
-
-    /* 等待时间同步完成 - 最多等待30秒 */
-    int retry = 0;
-    const int max_retries = 30;
+    httpd_resp_set_type(req, "text/html");
+    httpd_resp_send(req, response, strlen(response));
     
-    ESP_LOGI(TAG, "Waiting for NTP time sync...");
-    while (!is_time_synced() && ++retry < max_retries) {
-        ESP_LOGI(TAG, "Waiting for system time to be set... (%ds/%ds)", retry, max_retries);
-        vTaskDelay(pdMS_TO_TICKS(1000));
-    }
-    
-    if (!is_time_synced()) {
-        ESP_LOGE(TAG, "Failed to get time from NTP servers after %d seconds", max_retries);
-        esp_netif_sntp_deinit();
-        return;
-    }
-
-    ESP_LOGI(TAG, "Time synchronized successfully from NTP");
-    
-    /* 打印当前时间 */
-    time_t now;
-    struct tm timeinfo = {0};
-    time(&now);
-    localtime_r(&now, &timeinfo);
-    
-    char strftime_buf[64];
-    strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
-    ESP_LOGI(TAG, "Current time: %s", strftime_buf);
-    
-    esp_netif_sntp_deinit();
-}
-
-/* HTTP上报回调 */
-static esp_err_t _http_event_handler(esp_http_client_event_t *evt)
-{
-    switch (evt->event_id) {
-        case HTTP_EVENT_ERROR:
-            ESP_LOGE(HTTP_TAG, "HTTP Event Error");
-            break;
-        case HTTP_EVENT_ON_CONNECTED:
-            ESP_LOGI(HTTP_TAG, "HTTP connected");
-            break;
-        case HTTP_EVENT_HEADER_SENT:
-            ESP_LOGI(HTTP_TAG, "HTTP header sent");
-            break;
-        case HTTP_EVENT_ON_DATA:
-            ESP_LOGI(HTTP_TAG, "HTTP data received");
-            break;
-        case HTTP_EVENT_ON_FINISH:
-            ESP_LOGI(HTTP_TAG, "HTTP response finished");
-            break;
-        case HTTP_EVENT_DISCONNECTED:
-            ESP_LOGI(HTTP_TAG, "HTTP disconnected");
-            break;
-        default:
-            break;
-    }
+    ESP_LOGI(HTTP_TAG, "Time page accessed: %s", time_str);
     return ESP_OK;
 }
 
-/* 上报时间到服务器 */
-static void report_time_to_server(void)
+/* HTTP JSON API处理器 */
+static esp_err_t time_json_get_handler(httpd_req_t *req)
 {
-    if (!s_wifi_connected) {
-        ESP_LOGW(HTTP_TAG, "Cannot report: WiFi not connected");
-        return;
-    }
-    
-    if (!is_time_synced()) {
-        ESP_LOGW(HTTP_TAG, "Cannot report: Time not synced yet");
-        return;
-    }
-
     time_t now;
-    time(&now);
     struct tm timeinfo = {0};
-    localtime_r(&now, &timeinfo);
-    
     char time_str[64];
+    
+    time(&now);
+    localtime_r(&now, &timeinfo);
     strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", &timeinfo);
     
-    /* 构建JSON数据 */
     const char *weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", 
                               "Thursday", "Friday", "Saturday"};
     
@@ -271,64 +230,67 @@ static void report_time_to_server(void)
              time_str,
              weekdays[timeinfo.tm_wday]);
     
-    ESP_LOGI(HTTP_TAG, "Reporting time: %s", json_data);
+    httpd_resp_set_type(req, "application/json");
+    httpd_resp_send(req, json_data, strlen(json_data));
     
-    /* 配置HTTP客户端 */
-    esp_http_client_config_t config = {
-        .url = "http://10.1.41.99:8085/time",
-        .event_handler = _http_event_handler,
-        .method = HTTP_METHOD_POST,
-        .timeout_ms = 5000,
-    };
+    ESP_LOGI(HTTP_TAG, "JSON API accessed: %s", json_data);
+    return ESP_OK;
+}
+
+/* 启动HTTP服务器 */
+static void start_http_server(void)
+{
+    httpd_config_t config = HTTPD_DEFAULT_CONFIG();
+    config.server_port = 80;
+    config.stack_size = 4096;
     
-    esp_http_client_handle_t client = esp_http_client_init(&config);
+    ESP_LOGI(HTTP_TAG, "Starting HTTP server on port 80...");
     
-    /* 设置请求头 */
-    esp_http_client_set_header(client, "Content-Type", "application/json");
-    
-    /* 发送请求 */
-    esp_err_t err = esp_http_client_open(client, strlen(json_data));
+    esp_err_t err = httpd_start(&server, &config);
     if (err != ESP_OK) {
-        ESP_LOGE(HTTP_TAG, "Failed to open HTTP connection: %s", esp_err_to_name(err));
-        esp_http_client_cleanup(client);
+        ESP_LOGE(HTTP_TAG, "Failed to start HTTP server: %s", esp_err_to_name(err));
         return;
     }
     
-    /* 写入数据 */
-    err = esp_http_client_write(client, json_data, strlen(json_data));
-    if (err < 0) {
-        ESP_LOGE(HTTP_TAG, "Failed to write HTTP data: %s", esp_err_to_name(err));
-    } else {
-        ESP_LOGI(HTTP_TAG, "Successfully wrote %d bytes", err);
-    }
+    httpd_uri_t root_uri = {
+        .uri = "/",
+        .method = HTTP_GET,
+        .handler = root_get_handler,
+        .user_ctx = NULL
+    };
     
-    /* 读取响应 */
-    int status_code = esp_http_client_fetch_headers(client);
-    if (status_code >= 200 && status_code < 300) {
-        char response[256];
-        int content_len = esp_http_client_get_content_length(client);
-        if (content_len > 0 && content_len < (int)sizeof(response) - 1) {
-            int read_len = esp_http_client_read(client, response, content_len);
-            if (read_len > 0) {
-                response[read_len] = '\0';
-                ESP_LOGI(HTTP_TAG, "Server response (%d): %s", status_code, response);
-            }
-        } else {
-            ESP_LOGI(HTTP_TAG, "Server response (%d): (no content or length: %d)", 
-                     status_code, content_len);
-        }
-    } else {
-        ESP_LOGW(HTTP_TAG, "HTTP response status: %d", status_code);
-    }
+    httpd_uri_t json_uri = {
+        .uri = "/time.json",
+        .method = HTTP_GET,
+        .handler = time_json_get_handler,
+        .user_ctx = NULL
+    };
     
-    /* 清理资源 */
-    esp_http_client_cleanup(client);
+    httpd_register_uri_handler(server, &root_uri);
+    httpd_register_uri_handler(server, &json_uri);
+    
+    /* 获取服务器IP地址 */
+    esp_netif_ip_info_t ip_info;
+    esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
+    esp_netif_get_ip_info(netif, &ip_info);
+    char ip_str[32];
+    snprintf(ip_str, sizeof(ip_str), IPSTR, IP2STR(&ip_info.ip));
+    
+    ESP_LOGI(HTTP_TAG, "HTTP server started. Access http://%s/ or http://%s/time.json", ip_str, ip_str);
 }
 
-/* 定期上报定时器回调 */
-static void report_timer_callback(TimerHandle_t xTimer)
+/* 定期打印时间回调 */
+static void print_time_callback(TimerHandle_t xTimer)
 {
-    report_time_to_server();
+    time_t now;
+    struct tm timeinfo = {0};
+    char strftime_buf[64];
+    
+    time(&now);
+    localtime_r(&now, &timeinfo);
+    strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
+    
+    ESP_LOGI(TAG, "time_fetcher: time: %s, Sunday, Asia/Shanghai", strftime_buf);
 }
 
 void app_main(void)
@@ -343,7 +305,6 @@ void app_main(void)
 
     ESP_LOGI(TAG, "ESP32-S3-EYE WiFi Time Reporter started");
     ESP_LOGI(TAG, "Board: ESP32-S3-EYE");
-    ESP_LOGI(TAG, "Target server: http://10.1.41.99:8085");
     
     /* 设置时区为中国标准时间 */
     setenv("TZ", "CST-8", 1);
@@ -358,35 +319,26 @@ void app_main(void)
         esp_restart();
     }
     
-    /* 获取初始时间 - 此函数会阻塞直到时间同步完成 */
-    obtain_time();
+    /* 启动HTTP服务器 */
+    start_http_server();
     
-    /* 创建定期上报定时器 (每30秒) */
-    TimerHandle_t report_timer = xTimerCreate("report_timer",
-                                               pdMS_TO_TICKS(30000),
-                                               pdTRUE,
-                                               NULL,
-                                               report_timer_callback);
+    /* 创建定期打印时间定时器 (每10秒) */
+    TimerHandle_t print_timer = xTimerCreate("print_timer",
+                                             pdMS_TO_TICKS(10000),
+                                             pdTRUE,
+                                             NULL,
+                                             print_time_callback);
     
-    if (report_timer != NULL) {
-        if (xTimerStart(report_timer, pdMS_TO_TICKS(1000)) == pdPASS) {
-            ESP_LOGI(TAG, "Report timer started (30s interval)");
+    if (print_timer != NULL) {
+        if (xTimerStart(print_timer, pdMS_TO_TICKS(1000)) == pdPASS) {
+            ESP_LOGI(TAG, "Print timer started (10s interval)");
         } else {
-            ESP_LOGE(TAG, "Failed to start report timer");
+            ESP_LOGE(TAG, "Failed to start print timer");
         }
     }
     
-    /* 主循环 - 定期打印当前时间 */
-    char strftime_buf[64];
+    /* 主循环 - 等待 */
     while (1) {
-        vTaskDelay(pdMS_TO_TICKS(10000));  /* 每10秒打印一次时间 */
-        
-        time_t now;
-        struct tm timeinfo = {0};
-        time(&now);
-        localtime_r(&now, &timeinfo);
-        strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
-        
-        ESP_LOGI(TAG, "time_fetcher: time: %s, Sunday, Asia/Shanghai", strftime_buf);
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }

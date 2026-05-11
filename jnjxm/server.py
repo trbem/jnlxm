@@ -122,11 +122,14 @@ def load_users():
         users = {
             "admin": {
                 "password": "admin123",
+                "role": "admin",
+                "avatar": "👑",
                 "config": {
                     "name": "知心伙伴",
                     "system_prompt": config["system_prompt"],
                     "model": config["model"],
                     "max_context_rounds": 10,
+                    "selected_personality": "xiaonuan",
                     "quick_replies": DEFAULT_QUICK_REPLIES
                 }
             }
@@ -158,6 +161,36 @@ def get_user_config(username: str) -> dict:
     return config.copy()
 
 
+def load_personalities():
+    """加载人设配置"""
+    personalities_file = os.path.join(os.path.dirname(__file__), "personalities.json")
+    try:
+        with open(personalities_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            print(f"[人设] 已加载 {len(data.get('personalities', []))} 个人设")
+            return data
+    except FileNotFoundError:
+        print(f"[人设] 未找到 personalities.json，使用默认人设")
+        return {"personalities": []}
+    except json.JSONDecodeError as e:
+        print(f"[人设] personalities.json 格式错误: {e}")
+        return {"personalities": []}
+
+
+def get_user_personality_prompt(username: str, personality_id: str) -> str:
+    """获取用户选定人设的系统提示词"""
+    personalities_data = load_personalities()
+    personalities = personalities_data.get("personalities", [])
+    
+    # 查找指定人设
+    for p in personalities:
+        if p.get("id") == personality_id:
+            return p.get("system_prompt", config.get("system_prompt", ""))
+    
+    # 如果没找到，返回默认提示词
+    return config.get("system_prompt", "")
+
+
 def load_config():
     """加载配置文件"""
     global config
@@ -181,11 +214,15 @@ def save_config():
     print(f"[配置] 配置已保存到 config.json")
 
 
-def get_system_message():
-    """获取系统消息"""
+def get_system_message(personality_id: str = None):
+    """获取系统消息，可指定人设"""
+    if personality_id:
+        prompt = get_user_personality_prompt("", personality_id)
+    else:
+        prompt = config.get("system_prompt", "")
     return {
         "role": "system",
-        "content": config["system_prompt"]
+        "content": prompt
     }
 
 
@@ -534,13 +571,13 @@ def process_image_to_base64(image_bytes: bytes) -> str:
         raise ValueError(f"图像处理失败: {str(e)}")
 
 
-def call_image_api(image_base64: str, user_prompt: str, session_id: str) -> str:
+def call_image_api(image_base64: str, user_prompt: str, session_id: str, personality_id: str = None) -> str:
     """调用图像识别 API（带上下文）"""
     # 获取会话历史（只返回 user/assistant 消息）
     messages = get_session_history(session_id)
     
-    # 确保 system message 在最前面（OpenAI API 要求）
-    messages = [get_system_message()] + messages
+    # 确保 system message 在最前面（使用人设提示词）
+    messages = [get_system_message(personality_id)] + messages
     messages.append({
         "role": "user",
         "content": [
@@ -666,7 +703,8 @@ async def chat(request: Request):
     请求体:
     {
         "message": "用户消息",
-        "session_id": "会话ID（可选，不传则生成新会话）"
+        "session_id": "会话ID（可选，不传则生成新会话）",
+        "personality_id": "人设ID（可选）"
     }
     
     返回:
@@ -688,12 +726,13 @@ async def chat(request: Request):
         raise HTTPException(status_code=400, detail="消息不能为空")
     
     session_id = data.get("session_id", f"session_{int(time.time())}")
+    personality_id = data.get("personality_id")
     
     # 获取会话历史（只返回 user/assistant 消息）
     messages = get_session_history(session_id)
     
-    # 确保 system message 在最前面（OpenAI API 要求）
-    messages = [get_system_message()] + messages
+    # 确保 system message 在最前面（使用人设提示词）
+    messages = [get_system_message(personality_id)] + messages
     messages.append({"role": "user", "content": user_message})
     
     # 调用 API
@@ -721,7 +760,8 @@ async def image_chat(request: Request):
     {
         "image": "Base64 编码的 JPEG 图像",
         "message": "用户问题（可选，默认使用提示词）",
-        "session_id": "会话ID（可选）"
+        "session_id": "会话ID（可选）",
+        "personality_id": "人设ID（可选）"
     }
     
     返回:
@@ -744,9 +784,10 @@ async def image_chat(request: Request):
     
     user_message = data.get("message", "请描述这张图片里的内容，用中文回答，语气要温暖亲切。")
     session_id = data.get("session_id", f"session_{int(time.time())}")
+    personality_id = data.get("personality_id")
     
     # 调用图像 API
-    response_text = call_image_api(image_base64, user_message, session_id)
+    response_text = call_image_api(image_base64, user_message, session_id, personality_id)
     
     elapsed = time.time() - start_time
     
@@ -1102,10 +1143,14 @@ async def login(request: Request):
             "message": "登录成功",
             "username": username,
             "token": token,
+            "role": users.get(username, {}).get("role", "user"),
+            "avatar": users.get(username, {}).get("avatar", "👤"),
             "config": {
                 "name": config.get("name", "知心伙伴"),
                 "quick_replies": user_cfg.get("quick_replies", DEFAULT_QUICK_REPLIES)
-            }
+            },
+            "selected_personality": user_cfg.get("selected_personality", "xiaonuan"),
+            "theme": user_cfg.get("theme", "")
         }
     else:
         raise HTTPException(status_code=401, detail="用户名或密码错误")
@@ -1121,9 +1166,16 @@ async def get_user_info(request: Request):
         raise HTTPException(status_code=401, detail="未登录或token无效")
     
     session_info = active_sessions[token]
+    username = session_info["username"]
+    user_data = users.get(username, {})
+    
     return {
-        "username": session_info["username"],
-        "quick_replies": config.get("quick_replies", DEFAULT_QUICK_REPLIES)
+        "username": username,
+        "role": user_data.get("role", "user"),
+        "avatar": user_data.get("avatar", "👤"),
+        "quick_replies": user_data.get("config", {}).get("quick_replies", DEFAULT_QUICK_REPLIES),
+        "selected_personality": user_data.get("config", {}).get("selected_personality", "xiaonuan"),
+        "theme": user_data.get("config", {}).get("theme", "")
     }
 
 
@@ -1138,21 +1190,291 @@ async def logout(request: Request):
     return {"status": "success", "message": "已退出登录"}
 
 
+# ==================== 人设相关 API ====================
+
+@app.get("/api/personalities")
+async def get_personalities():
+    """获取所有人设列表"""
+    return load_personalities()
+
+
+@app.post("/api/admin/personalities")
+async def save_personality(request: Request):
+    """保存人设（仅管理员）"""
+    token = request.headers.get("X-Auth-Token", "")
+    
+    if not is_admin(token):
+        raise HTTPException(status_code=403, detail="需要管理员权限")
+    
+    try:
+        data = await request.json()
+    except Exception:
+        raise HTTPException(status_code=400, detail="无效的 JSON 格式")
+    
+    personalities_file = os.path.join(os.path.dirname(__file__), "personalities.json")
+    
+    try:
+        with open(personalities_file, "r", encoding="utf-8") as f:
+            personalities_data = json.load(f)
+    except Exception:
+        personalities_data = {"personalities": []}
+    
+    # 更新或添加人设
+    persona_id = data.get("id")
+    updated = False
+    for i, p in enumerate(personalities_data.get("personalities", [])):
+        if p.get("id") == persona_id:
+            personalities_data["personalities"][i] = {
+                "id": data.get("id"),
+                "name": data.get("name", ""),
+                "emoji": data.get("emoji", "🌸"),
+                "description": data.get("description", ""),
+                "system_prompt": data.get("system_prompt", ""),
+                "color": data.get("color", "#6c5ce7"),
+                "gradient": data.get("gradient", "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"),
+                "quick_replies": data.get("quick_replies", [])
+            }
+            updated = True
+            break
+    
+    if not updated:
+        # 添加新人设
+        personalities_data["personalities"].append({
+            "id": data.get("id"),
+            "name": data.get("name", ""),
+            "emoji": data.get("emoji", "🌸"),
+            "description": data.get("description", ""),
+            "system_prompt": data.get("system_prompt", ""),
+            "color": data.get("color", "#6c5ce7"),
+            "gradient": data.get("gradient", "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"),
+            "quick_replies": data.get("quick_replies", [])
+        })
+    
+    with open(personalities_file, "w", encoding="utf-8") as f:
+        json.dump(personalities_data, f, ensure_ascii=False, indent=2)
+    
+    return {"status": "success", "message": "人设已保存"}
+
+
+@app.post("/api/user/select_personality")
+async def select_personality(request: Request):
+    """选择人设"""
+    token = request.headers.get("X-Auth-Token", "")
+    if not token or token not in active_sessions:
+        raise HTTPException(status_code=401, detail="未登录或token无效")
+    
+    try:
+        data = await request.json()
+    except Exception:
+        raise HTTPException(status_code=400, detail="无效的 JSON 格式")
+    
+    personality_id = data.get("personality_id", "")
+    
+    # 保存用户选择的人设
+    session_info = active_sessions[token]
+    username = session_info["username"]
+    
+    if username in users:
+        if "config" not in users[username]:
+            users[username]["config"] = {}
+        users[username]["config"]["selected_personality"] = personality_id
+        save_users()
+    
+    return {"status": "success", "message": "人设已切换"}
+
+
 @app.post("/api/user/update_quick_replies")
 async def update_quick_replies(request: Request):
     """更新快捷回复"""
+    token = request.headers.get("X-Auth-Token", "")
+    if not token or token not in active_sessions:
+        raise HTTPException(status_code=401, detail="未登录或token无效")
+    
     try:
         data = await request.json()
-        quick_replies = data.get("quick_replies", [])
-        
-        if "admin" in users:
-            users["admin"]["config"]["quick_replies"] = quick_replies
-            save_users()
-        
-        config["quick_replies"] = quick_replies
-        return {"status": "success", "message": "快捷回复已更新"}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"更新失败: {str(e)}")
+    except Exception:
+        raise HTTPException(status_code=400, detail="无效的 JSON 格式")
+    
+    quick_replies = data.get("quick_replies", [])
+    
+    session_info = active_sessions[token]
+    username = session_info["username"]
+    
+    if username in users:
+        if "config" not in users[username]:
+            users[username]["config"] = {}
+        users[username]["config"]["quick_replies"] = quick_replies
+        save_users()
+    
+    return {"status": "success", "message": "快捷回复已更新"}
+
+
+# ==================== 用户注册 API ====================
+
+@app.post("/api/register")
+async def register(request: Request):
+    """用户注册"""
+    try:
+        data = await request.json()
+    except Exception:
+        raise HTTPException(status_code=400, detail="无效的 JSON 格式")
+    
+    username = data.get("username", "")
+    password = data.get("password", "")
+    
+    if not username or not password:
+        raise HTTPException(status_code=400, detail="用户名和密码不能为空")
+    
+    if len(username) < 3:
+        raise HTTPException(status_code=400, detail="用户名至少需要3个字符")
+    
+    if len(password) < 6:
+        raise HTTPException(status_code=400, detail="密码至少需要6个字符")
+    
+    if username in users:
+        raise HTTPException(status_code=400, detail="用户名已存在")
+    
+    # 创建新用户
+    users[username] = {
+        "password": password,
+        "role": "user",
+        "avatar": "👤",
+        "config": {
+            "name": "知心伙伴",
+            "system_prompt": config.get("system_prompt", ""),
+            "model": config.get("model", ""),
+            "max_context_rounds": 10,
+            "selected_personality": "xiaonuan",
+            "quick_replies": DEFAULT_QUICK_REPLIES
+        }
+    }
+    save_users()
+    
+    return {"status": "success", "message": "注册成功"}
+
+
+# ==================== 管理后台 API ====================
+
+def is_admin(token: str) -> bool:
+    """检查是否为管理员"""
+    if not token or token not in active_sessions:
+        return False
+    session_info = active_sessions[token]
+    username = session_info["username"]
+    return users.get(username, {}).get("role") == "admin"
+
+
+@app.get("/api/admin/users")
+async def get_all_users(request: Request):
+    """获取所有用户列表（仅管理员）"""
+    token = request.headers.get("X-Auth-Token", "")
+    
+    if not is_admin(token):
+        raise HTTPException(status_code=403, detail="需要管理员权限")
+    
+    user_list = []
+    for username, user_data in users.items():
+        user_list.append({
+            "username": username,
+            "role": user_data.get("role", "user"),
+            "avatar": user_data.get("avatar", "👤"),
+            "created": True
+        })
+    
+    return {"users": user_list}
+
+
+@app.post("/api/admin/users")
+async def create_user(request: Request):
+    """创建新用户（仅管理员）"""
+    token = request.headers.get("X-Auth-Token", "")
+    
+    if not is_admin(token):
+        raise HTTPException(status_code=403, detail="需要管理员权限")
+    
+    try:
+        data = await request.json()
+    except Exception:
+        raise HTTPException(status_code=400, detail="无效的 JSON 格式")
+    
+    username = data.get("username", "")
+    password = data.get("password", "")
+    role = data.get("role", "user")
+    
+    if not username or not password:
+        raise HTTPException(status_code=400, detail="用户名和密码不能为空")
+    
+    if username in users:
+        raise HTTPException(status_code=400, detail="用户名已存在")
+    
+    # 创建新用户
+    users[username] = {
+        "password": password,
+        "role": role,
+        "avatar": "👤",
+        "config": {
+            "name": "知心伙伴",
+            "system_prompt": config.get("system_prompt", ""),
+            "model": config.get("model", ""),
+            "max_context_rounds": 10,
+            "selected_personality": "xiaonuan",
+            "quick_replies": DEFAULT_QUICK_REPLIES
+        }
+    }
+    save_users()
+    
+    return {"status": "success", "message": f"用户 {username} 已创建"}
+
+
+@app.delete("/api/admin/users/{username}")
+async def delete_user(username: str, request: Request):
+    """删除用户（仅管理员）"""
+    token = request.headers.get("X-Auth-Token", "")
+    
+    if not is_admin(token):
+        raise HTTPException(status_code=403, detail="需要管理员权限")
+    
+    if username not in users:
+        raise HTTPException(status_code=404, detail="用户不存在")
+    
+    if username == "admin":
+        raise HTTPException(status_code=400, detail="不能删除管理员账户")
+    
+    del users[username]
+    save_users()
+    
+    return {"status": "success", "message": f"用户 {username} 已删除"}
+
+
+@app.put("/api/admin/users/{username}")
+async def update_user(username: str, request: Request):
+    """更新用户信息（仅管理员）"""
+    token = request.headers.get("X-Auth-Token", "")
+    
+    if not is_admin(token):
+        raise HTTPException(status_code=403, detail="需要管理员权限")
+    
+    if username not in users:
+        raise HTTPException(status_code=404, detail="用户不存在")
+    
+    try:
+        data = await request.json()
+    except Exception:
+        raise HTTPException(status_code=400, detail="无效的 JSON 格式")
+    
+    # 更新用户信息
+    if "password" in data:
+        users[username]["password"] = data["password"]
+    if "role" in data:
+        users[username]["role"] = data["role"]
+    if "avatar" in data:
+        users[username]["avatar"] = data["avatar"]
+    if "config" in data:
+        users[username]["config"] = data["config"]
+    
+    save_users()
+    
+    return {"status": "success", "message": f"用户 {username} 已更新"}
 
 
 @app.get("/api/health")

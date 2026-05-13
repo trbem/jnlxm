@@ -331,7 +331,7 @@ static void audio_http_send_task(void *pvParameters)
                 continue;
             }
             
-            /* 每次请求都创建新的HTTP客户端，避免Connection reset问题 */
+            /* 每次请求都创建新的HTTP客户端 */
             esp_http_client_config_t config = {
                 .url = VOICE_SERVER_URL,
                 .method = HTTP_METHOD_POST,
@@ -347,8 +347,9 @@ static void audio_http_send_task(void *pvParameters)
                 continue;
             }
             
-            /* 设置请求头 */
+            /* 设置请求头 - 明确关闭连接 */
             esp_http_client_set_header(client, "Content-Type", "application/octet-stream");
+            esp_http_client_set_header(client, "Connection", "close");
             
             /* 打开连接 */
             esp_err_t err = esp_http_client_open(client, packet->length);

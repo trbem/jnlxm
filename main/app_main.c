@@ -321,6 +321,8 @@ static void audio_capture_task(void *pvParameters)
 static void audio_http_send_task(void *pvParameters)
 {
     audio_packet_t *packet = NULL;
+    int consecutive_failures = 0;
+    const int MAX_FAILURES_BEFORE_DELAY = 5;
     
     ESP_LOGI(AUDIO_TAG, "HTTP send task started");
     
@@ -344,6 +346,8 @@ static void audio_http_send_task(void *pvParameters)
                 ESP_LOGE(HTTP_CLIENT_TAG, "Failed to init HTTP client");
                 free(packet->data);
                 free(packet);
+                consecutive_failures++;
+                vTaskDelay(pdMS_TO_TICKS(consecutive_failures >= MAX_FAILURES_BEFORE_DELAY ? 1000 : 100));
                 continue;
             }
             
@@ -358,7 +362,8 @@ static void audio_http_send_task(void *pvParameters)
                 esp_http_client_cleanup(client);
                 free(packet->data);
                 free(packet);
-                vTaskDelay(pdMS_TO_TICKS(100));
+                consecutive_failures++;
+                vTaskDelay(pdMS_TO_TICKS(consecutive_failures >= MAX_FAILURES_BEFORE_DELAY ? 1000 : 100));
                 continue;
             }
             
@@ -371,6 +376,7 @@ static void audio_http_send_task(void *pvParameters)
                 int status_code = esp_http_client_fetch_headers(client);
                 if (status_code >= 200 && status_code < 300) {
                     ESP_LOGI(HTTP_CLIENT_TAG, "Send OK, status %d", status_code);
+                    consecutive_failures = 0;  /* 重置失败计数 */
                 } else {
                     ESP_LOGW(HTTP_CLIENT_TAG, "Status %d", status_code);
                 }
@@ -384,8 +390,12 @@ static void audio_http_send_task(void *pvParameters)
             free(packet->data);
             free(packet);
             
-            /* 短暂延迟避免连接过于频繁 */
-            vTaskDelay(pdMS_TO_TICKS(10));
+            /* 根据失败次数调整延迟 */
+            if (consecutive_failures >= MAX_FAILURES_BEFORE_DELAY) {
+                vTaskDelay(pdMS_TO_TICKS(1000));  /* 失败过多时等待1秒 */
+            } else {
+                vTaskDelay(pdMS_TO_TICKS(50));   /* 正常延迟50ms */
+            }
         }
     }
 }

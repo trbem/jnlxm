@@ -1,0 +1,1193 @@
+[0;32mI (114) esp_image: segment 1: paddr=00032df4 vaddr=3fc9c500 sizeESP-ROM:esp32s3-20210327[0m
+Build:Mar 27 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0x2a (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4200d160
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2810,len:0x1564
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xd24
+load:0x403cb700,len:0x2ed4
+entry 0x403c8928
+[0;32mI (26) boot: ESP-IDF v5.4.4 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time May 13 2026 10:54:14[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (27) boot: chip revision: v0.2[0m
+[0;32mI (30) boot: efuse block revision: v1.3[0m
+[0;32mI (33) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (37) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3c0b0020 size=22dcch (142796) map[0m
+[0;32mI (114) esp_image: segment 1: paddr=00032df4 vaddr=3fc9c500 size=05644h ( 22084) load[0m
+[0;32mI (118) esp_image: segment 2: paddr=00038440 vaddr=40374000 size=07bd8h ( 31704) load[0m
+[0;32mI (126) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=a843ch (689212) map[0m
+[0;32mI (248) esp_image: segment 4: paddr=000e8464 vaddr=4037bbd8 size=1082ch ( 67628) load[0m
+[0;32mI (263) esp_image: segment 5: paddr=000f8c98 vaddr=50000000 size=0001ch (    28) load[0m
+[0;32mI (273) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (273) boot: Disabling RNG early entropy source...[0m
+[0;32mI (283) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (283) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (283) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (285) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (289) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (294) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (298) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (303) octal_psram: BurstType    : 0x01 (Hybrid Wrap)[0m
+[0;32mI (308) octal_psram: BurstLen     : 0x01 (32 Byte)[0m
+[0;32mI (312) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (317) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (322) MSPI Timing: PSRAM timing tuning index: 5[0m
+[0;32mI (326) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (330) esp_psram: Speed: 80MHz[0m
+[0;32mI (333) cpu_start: Multicore app[0m
+[0;32mI (768) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (776) cpu_start: GPIO 44 and 43 are used as console UART I/O pins[0m
+[0;32mI (777) cpu_start: Pro cpu start user code[0m
+[0;32mI (777) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (779) app_init: Application information:[0m
+[0;32mI (783) app_init: Project name:     wifi_time_reporter[0m
+[0;32mI (787) app_init: App version:      1.0.0[0m
+[0;32mI (791) app_init: Compile time:     May 13 2026 10:47:30[0m
+[0;32mI (796) app_init: ELF file SHA256:  52cfda862...[0m
+[0;32mI (801) app_init: ESP-IDF:          v5.4.4[0m
+[0;32mI (804) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (808) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (812) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (816) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (822) heap_init: At 3FCA6118 len 000435F8 (269 KiB): RAM[0m
+[0;32mI (827) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (833) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (838) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (843) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (851) spi_flash: detected chip: generic[0m
+[0;32mI (853) spi_flash: flash io: dio[0m
+[0;33mW (856) spi_flash: Detected size(8192k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (869) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (875) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (882) main_task: Started on CPU0[0m
+[0;32mI (892) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (892) main_task: Calling app_main()[0m
+[0;32mI (912) time_fetcher: ESP32-S3-EYE WiFi Voice Reporter started[0m
+[0;32mI (912) time_fetcher: Board: ESP32-S3-EYE[0m
+[0;32mI (912) pp: pp rom version: e7ae62f[0m
+[0;32mI (912) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (932) wifi:wifi driver task: 3fcb8ca8, prio:23, stack:6656, core=0[0m
+[0;32mI (942) wifi:wifi firmware version: 8896d66[0m
+[0;32mI (942) wifi:wifi certification version: v7.0[0m
+[0;32mI (942) wifi:config NVS flash: enabled[0m
+[0;32mI (942) wifi:config nano formatting: disabled[0m
+[0;32mI (942) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (952) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (952) wifi:Init management short buffer num: 32[0m
+[0;32mI (952) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (962) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (962) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (972) wifi:Init static rx buffer num: 10[0m
+[0;32mI (972) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (972) wifi_init: rx ba win: 6[0m
+[0;32mI (982) wifi_init: accept mbox: 6[0m
+[0;32mI (982) wifi_init: tcpip mbox: 32[0m
+[0;32mI (982) wifi_init: udp mbox: 6[0m
+[0;32mI (992) wifi_init: tcp mbox: 6[0m
+[0;32mI (992) wifi_init: tcp tx win: 5760[0m
+[0;32mI (992) wifi_init: tcp rx win: 5760[0m
+[0;32mI (992) wifi_init: tcp mss: 1440[0m
+[0;32mI (1002) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1002) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1012) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10[0m
+[0;32mI (1052) wifi:mode : sta (94:a9:90:1c:70:9c)[0m
+[0;32mI (1052) wifi:enable tsf[0m
+[0;32mI (1052) time_fetcher: WiFi STA mode initialized, connecting...[0m
+[0;32mI (1062) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1062) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1112) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (1132) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (1172) wifi:connected with 431, aid = 7, channel 6, BW20, bssid = 3c:cd:57:f9:76:82[0m
+[0;32mI (1172) wifi:security: WPA2-PSK, phy: bgn, rssi: -47, cipher(pairwise:0x3, group:0x3), pmf:0[0m
+[0;32mI (1172) wifi:pm start, type: 1[0m
+
+[0;32mI (1172) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (1182) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (1212) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (1262) wifi:<ba-add>idx:0 (ifx:0, 3c:cd:57:f9:76:82), tid:7, ssn:0, winSize:64[0m
+[0;32mI (2312) esp_netif_handlers: sta ip: 10.1.41.140, mask: 255.255.255.0, gw: 10.1.41.254[0m
+[0;32mI (2312) time_fetcher: Got IP: 10.1.41.140[0m
+[0;32mI (2312) time_fetcher: Configuring SNTP...[0m
+[0;32mI (2312) time_fetcher: SNTP configured, time will be synced automatically[0m
+[0;32mI (2322) time_fetcher: Connected to AP SSID:'431'[0m
+[0;32mI (2322) audio_capture: I2S PDM microphone initialized[0m
+[0;32mI (2332) http_server: Starting HTTP server...[0m
+[0;32mI (2332) http_server: HTTP server started. Access http://10.1.41.140/[0m
+[0;32mI (2342) audio_capture: Audio capture task started[0m
+[0;32mI (2342) time_fetcher: Print timer started (10s interval)[0m
+[0;32mI (2452) wifi:<ba-add>idx:1 (ifx:0, 3c:cd:57:f9:76:82), tid:0, ssn:1, winSize:64[0m
+[1;31mE (7442) esp-tls: [sock=57] select() timeout[0m
+[1;31mE (7442) transport_base: Failed to open a new connection: 32774[0m
+[1;31mE (7442) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (7442) http_client: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[0;33mW (7452) audio_capture: Failed to send audio data[0m
+[0;32mI (12342) time_fetcher: time_fetcher: time: Wed May 13 10:58:13 2026, Sunday, Asia/Shanghai[0m
+
+***ERROR*** A stack overflow in task Tmr Svc has been detected.
+
+
+Backtrace: 0x40375f0d:0x3fcab260 0x4037e54d:0x3fcab280 0x4037f472:0x3fcab2a0 0x40380e47:0x3fcab320 0x4037f538:0x3fcab340 0x4037f52e:0x00003036 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 52cfda862
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x2a (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375e4d
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2810,len:0x1564
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xd24
+load:0x403cb700,len:0x2ed4
+entry 0x403c8928
+[0;32mI (26) boot: ESP-IDF v5.4.4 2nd stage bootloader[0m
+[0;32mI (26) boot: compile time May 13 2026 10:54:14[0m
+[0;32mI (26) boot: Multicore bootloader[0m
+[0;32mI (27) boot: chip revision: v0.2[0m
+[0;32mI (29) boot: efuse block revision: v1.3[0m
+[0;32mI (33) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (37) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (40) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (44) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (51) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (64) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (77) boot: End of partition table[0m
+[0;32mI (80) esp_image: segment 0: paddr=00010020 vaddr=3c0b0020 size=22dcch (142796) map[0m
+[0;32mI (113) esp_image: segment 1: paddr=00032df4 vaddr=3fc9c500 size=05644h ( 22084) load[0m
+[0;32mI (118) esp_image: segment 2: paddr=00038440 vaddr=40374000 size=07bd8h ( 31704) load[0m
+[0;32mI (125) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=a843ch (689212) map[0m
+[0;32mI (247) esp_image: segment 4: paddr=000e8464 vaddr=4037bbd8 size=1082ch ( 67628) load[0m
+[0;32mI (262) esp_image: segment 5: paddr=000f8c98 vaddr=50000000 size=0001ch (    28) load[0m
+[0;32mI (272) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (272) boot: Disabling RNG early entropy source...[0m
+[0;32mI (282) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (282) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (283) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (285) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (289) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (293) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (297) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (302) octal_psram: BurstType    : 0x01 (Hybrid Wrap)[0m
+[0;32mI (307) octal_psram: BurstLen     : 0x01 (32 Byte)[0m
+[0;32mI (312) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (317) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (322) MSPI Timing: PSRAM timing tuning index: 5[0m
+[0;32mI (325) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (329) esp_psram: Speed: 80MHz[0m
+[0;32mI (332) cpu_start: Multicore app[0m
+[0;32mI (768) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (776) cpu_start: GPIO 44 and 43 are used as console UART I/O pins[0m
+[0;32mI (777) cpu_start: Pro cpu start user code[0m
+[0;32mI (777) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (778) app_init: Application information:[0m
+[0;32mI (782) app_init: Project name:     wifi_time_reporter[0m
+[0;32mI (787) app_init: App version:      1.0.0[0m
+[0;32mI (791) app_init: Compile time:     May 13 2026 10:47:30[0m
+[0;32mI (796) app_init: ELF file SHA256:  52cfda862...[0m
+[0;32mI (800) app_init: ESP-IDF:          v5.4.4[0m
+[0;32mI (804) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (808) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (812) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (816) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (822) heap_init: At 3FCA6118 len 000435F8 (269 KiB): RAM[0m
+[0;32mI (827) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (832) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (837) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (843) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (850) spi_flash: detected chip: generic[0m
+[0;32mI (853) spi_flash: flash io: dio[0m
+[0;33mW (856) spi_flash: Detected size(8192k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (868) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (874) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (881) main_task: Started on CPU0[0m
+[0;32mI (891) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (891) main_task: Calling app_main()[0m
+[0;32mI (911) time_fetcher: ESP32-S3-EYE WiFi Voice Reporter started[0m
+[0;32mI (911) time_fetcher: Board: ESP32-S3-EYE[0m
+[0;32mI (911) pp: pp rom version: e7ae62f[0m
+[0;32mI (911) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (931) wifi:wifi driver task: 3fcb8ca8, prio:23, stack:6656, core=0[0m
+[0;32mI (941) wifi:wifi firmware version: 8896d66[0m
+[0;32mI (941) wifi:wifi certification version: v7.0[0m
+[0;32mI (941) wifi:config NVS flash: enabled[0m
+[0;32mI (941) wifi:config nano formatting: disabled[0m
+[0;32mI (941) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (951) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (951) wifi:Init management short buffer num: 32[0m
+[0;32mI (951) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (961) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (961) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (971) wifi:Init static rx buffer num: 10[0m
+[0;32mI (971) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (971) wifi_init: rx ba win: 6[0m
+[0;32mI (981) wifi_init: accept mbox: 6[0m
+[0;32mI (981) wifi_init: tcpip mbox: 32[0m
+[0;32mI (981) wifi_init: udp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp tx win: 5760[0m
+[0;32mI (991) wifi_init: tcp rx win: 5760[0m
+[0;32mI (991) wifi_init: tcp mss: 1440[0m
+[0;32mI (1001) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1001) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1011) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10[0m
+[0;32mI (1061) wifi:mode : sta (94:a9:90:1c:70:9c)[0m
+[0;32mI (1071) wifi:enable tsf[0m
+[0;32mI (1071) time_fetcher: WiFi STA mode initialized, connecting...[0m
+[0;32mI (1131) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1131) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1161) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (1201) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (1241) wifi:connected with 431, aid = 7, channel 6, BW20, bssid = 3c:cd:57:f9:76:82[0m
+[0;32mI (1241) wifi:security: WPA2-PSK, phy: bgn, rssi: -42, cipher(pairwise:0x3, group:0x3), pmf:0[0m
+[0;32mI (1251) wifi:pm start, type: 1[0m
+
+[0;32mI (1251) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (1261) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (1301) wifi:<ba-add>idx:0 (ifx:0, 3c:cd:57:f9:76:82), tid:7, ssn:0, winSize:64[0m
+[0;32mI (1331) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (2341) esp_netif_handlers: sta ip: 10.1.41.140, mask: 255.255.255.0, gw: 10.1.41.254[0m
+[0;32mI (2341) time_fetcher: Got IP: 10.1.41.140[0m
+[0;32mI (2341) time_fetcher: Configuring SNTP...[0m
+[0;32mI (2341) time_fetcher: SNTP configured, time will be synced automatically[0m
+[0;32mI (2351) time_fetcher: Connected to AP SSID:'431'[0m
+[0;32mI (2351) audio_capture: I2S PDM microphone initialized[0m
+[0;32mI (2361) http_server: Starting HTTP server...[0m
+[0;32mI (2361) http_server: HTTP server started. Access http://10.1.41.140/[0m
+[0;32mI (2371) audio_capture: Audio capture task started[0m
+[0;32mI (2371) time_fetcher: Print timer started (10s interval)[0m
+[0;32mI (2481) wifi:<ba-add>idx:1 (ifx:0, 3c:cd:57:f9:76:82), tid:0, ssn:1, winSize:64[0m
+[1;31mE (7471) esp-tls: [sock=57] select() timeout[0m
+[1;31mE (7471) transport_base: Failed to open a new connection: 32774[0m
+[1;31mE (7471) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (7471) http_client: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[0;33mW (7481) audio_capture: Failed to send audio data[0m
+[0;32mI (247) esp_image: segment 4: paddr=000e8464 vaddr=4037bbd8 sizeI (773) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (781) cpu_start: GPIO 44 and 43 are used as console UART I/O pins[0m
+[0;32mI (782) cpu_start: Pro cpu start user code[0m
+[0;32mI (782) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (783) app_init: Application information:[0m
+[0;32mI (787) app_init: Project name:     wifi_time_reporter[0m
+[0;32mI (792) app_init: App version:      1.0.0[0m
+[0;32mI (796) app_init: Compile time:     May 13 2026 10:47:30[0m
+[0;32mI (801) app_init: ELF file SHA256:  52cfda862...[0m
+[0;32mI (805) app_init: ESP-IDF:          v5.4.4[0m
+[0;32mI (809) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (813) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (817) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (821) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (827) heap_init: At 3FCA6118 len 000435F8 (269 KiB): RAM[0m
+[0;32mI (832) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (837) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (843) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (848) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (855) spi_flash: detected chip: generic[0m
+[0;32mI (858) spi_flash: flash io: dio[0m
+[0;33mW (861) spi_flash: Detected size(8192k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (874) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (880) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (887) main_task: Started on CPU0[0m
+[0;32mI (897) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (897) main_task: Calling app_main()[0m
+[0;32mI (917) time_fetcher: ESP32-S3-EYE WiFi Voice Reporter started[0m
+[0;32mI (917) time_fetcher: Board: ESP32-S3-EYE[0m
+[0;32mI (917) pp: pp rom version: e7ae62f[0m
+[0;32mI (917) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (937) wifi:wifi driver task: 3fcb8ca8, prio:23, stack:6656, core=0[0m
+[0;32mI (947) wifi:wifi firmware version: 8896d66[0m
+[0;32mI (947) wifi:wifi certification version: v7.0[0m
+[0;32mI (947) wifi:config NVS flash: enabled[0m
+[0;32mI (947) wifi:config nano formatting: disabled[0m
+[0;32mI (947) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (957) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (957) wifi:Init management short buffer num: 32[0m
+[0;32mI (957) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (967) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (967) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (977) wifi:Init static rx buffer num: 10[0m
+[0;32mI (977) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (977) wifi_init: rx ba win: 6[0m
+[0;32mI (987) wifi_init: accept mbox: 6[0m
+[0;32mI (987) wifi_init: tcpip mbox: 32[0m
+[0;32mI (987) wifi_init: udp mbox: 6[0m
+[0;32mI (997) wifi_init: tcp mbox: 6[0m
+[0;32mI (997) wifi_init: tcp tx win: 5760[0m
+[0;32mI (997) wifi_init: tcp rx win: 5760[0m
+[0;32mI (997) wifi_init: tcp mss: 1440[0m
+[0;32mI (1007) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1007) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1017) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10[0m
+[0;32mI (1067) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)[0m
+[0;32mI (1107) wifi:mode : sta (94:a9:90:1c:70:9c)[0m
+[0;32mI (1107) wifi:enable tsf[0m
+[0;32mI (1107) time_fetcher: WiFi STA mode initialized, connecting...[0m
+[0;32mI (1127) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1127) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1147) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (1217) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (1267) wifi:connected with 431, aid = 7, channel 6, BW20, bssid = 3c:cd:57:f9:76:82[0m
+[0;32mI (1267) wifi:security: WPA2-PSK, phy: bgn, rssi: -37, cipher(pairwise:0x3, group:0x3), pmf:0[0m
+[0;32mI (1277) wifi:pm start, type: 1[0m
+
+[0;32mI (1277) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (1287) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (1307) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (1337) wifi:<ba-add>idx:0 (ifx:0, 3c:cd:57:f9:76:82), tid:7, ssn:0, winSize:64[0m
+[0;32mI (2367) esp_netif_handlers: sta ip: 10.1.41.140, mask: 255.255.255.0, gw: 10.1.41.254[0m
+[0;32mI (2367) time_fetcher: Got IP: 10.1.41.140[0m
+[0;32mI (2367) time_fetcher: Configuring SNTP...[0m
+[0;32mI (2367) time_fetcher: SNTP configured, time will be synced automatically[0m
+[0;32mI (2377) time_fetcher: Connected to AP SSID:'431'[0m
+[0;32mI (2377) audio_capture: I2S PDM microphone initialized[0m
+[0;32mI (2387) http_server: Starting HTTP server...[0m
+[0;32mI (2387) http_server: HTTP server started. Access http://10.1.41.140/[0m
+[0;32mI (2397) audio_capture: Audio capture task started[0m
+[0;32mI (2397) time_fetcher: Print timer started (10s interval)[0m
+[0;32mI (2497) wifi:<ba-add>idx:1 (ifx:0, 3c:cd:57:f9:76:82), tid:0, ssn:1, winSize:64[0m
+[0;32mI (247) esp_image: segment 4: paddr=000e8464 vaddr=4037bbd8 sizeI (773) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (781) cpu_start: GPIO 44 and 43 are used as console UART I/O pins[0m
+[0;32mI (782) cpu_start: Pro cpu start user code[0m
+[0;32mI (782) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (783) app_init: Application information:[0m
+[0;32mI (787) app_init: Project name:     wifi_time_reporter[0m
+[0;32mI (792) app_init: App version:      1.0.0[0m
+[0;32mI (796) app_init: Compile time:     May 13 2026 10:47:30[0m
+[0;32mI (801) app_init: ELF file SHA256:  52cfda862...[0m
+[0;32mI (805) app_init: ESP-IDF:          v5.4.4[0m
+[0;32mI (809) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (813) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (817) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (821) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (827) heap_init: At 3FCA6118 len 000435F8 (269 KiB): RAM[0m
+[0;32mI (832) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (837) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (843) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (848) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (855) spi_flash: detected chip: generic[0m
+[0;32mI (858) spi_flash: flash io: dio[0m
+[0;33mW (861) spi_flash: Detected size(8192k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (874) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (880) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (887) main_task: Started on CPU0[0m
+[0;32mI (897) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (897) main_task: Calling app_main()[0m
+[0;32mI (917) time_fetcher: ESP32-S3-EYE WiFi Voice Reporter started[0m
+[0;32mI (917) time_fetcher: Board: ESP32-S3-EYE[0m
+[0;32mI (917) pp: pp rom version: e7ae62f[0m
+[0;32mI (917) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (937) wifi:wifi driver task: 3fcb8ca8, prio:23, stack:6656, core=0[0m
+[0;32mI (947) wifi:wifi firmware version: 8896d66[0m
+[0;32mI (947) wifi:wifi certification version: v7.0[0m
+[0;32mI (947) wifi:config NVS flash: enabled[0m
+[0;32mI (947) wifi:config nano formatting: disabled[0m
+[0;32mI (947) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (957) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (957) wifi:Init management short buffer num: 32[0m
+[0;32mI (957) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (967) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (967) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (977) wifi:Init static rx buffer num: 10[0m
+[0;32mI (977) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (977) wifi_init: rx ba win: 6[0m
+[0;32mI (987) wifi_init: accept mbox: 6[0m
+[0;32mI (987) wifi_init: tcpip mbox: 32[0m
+[0;32mI (987) wifi_init: udp mbox: 6[0m
+[0;32mI (997) wifi_init: tcp mbox: 6[0m
+[0;32mI (997) wifi_init: tcp tx win: 5760[0m
+[0;32mI (997) wifi_init: tcp rx win: 5760[0m
+[0;32mI (997) wifi_init: tcp mss: 1440[0m
+[0;32mI (1007) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1007) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1017) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10[0m
+[0;32mI (1057) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)[0m
+[0;32mI (1067) wifi:mode : sta (94:a9:90:1c:70:9c)[0m
+[0;32mI (1067) wifi:enable tsf[0m
+[0;32mI (1077) time_fetcher: WiFi STA mode initialized, connecting...[0m
+[0;32mI (1117) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1117) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1157) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (1207) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (1257) wifi:connected with 431, aid = 7, channel 6, BW20, bssid = 3c:cd:57:f9:76:82[0m
+[0;32mI (1257) wifi:security: WPA2-PSK, phy: bgn, rssi: -47, cipher(pairwise:0x3, group:0x3), pmf:0[0m
+[0;32mI (1257) wifi:pm start, type: 1[0m
+
+[0;32mI (1257) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (1267) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (1317) wifi:<ba-add>idx:0 (ifx:0, 3c:cd:57:f9:76:82), tid:7, ssn:0, winSize:64[0m
+[0;32mI (1317) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (2367) esp_netif_handlers: sta ip: 10.1.41.140, mask: 255.255.255.0, gw: 10.1.41.254[0m
+[0;32mI (2367) time_fetcher: Got IP: 10.1.41.140[0m
+[0;32mI (2367) time_fetcher: Configuring SNTP...[0m
+[0;32mI (2367) time_fetcher: SNTP configured, time will be synced automatically[0m
+[0;32mI (2377) time_fetcher: Connected to AP SSID:'431'[0m
+[0;32mI (2377) audio_capture: I2S PDM microphone initialized[0m
+[0;32mI (2387) http_server: Starting HTTP server...[0m
+[0;32mI (2387) http_server: HTTP server started. Access http://10.1.41.140/[0m
+[0;32mI (2397) audio_capture: Audio capture task started[0m
+[0;32mI (2397) time_fetcher: Print timer started (10s interval)[0m
+I (2497) wifi:<ba-add>idx:1 (ifx:0, 3c:cd:57:f9:76:82), tid:0, ssn:1, winSize:64
+[1;31mE (7497) esp-tls: [sock=57] select() timeout[0m
+[1;31mE (7497) transport_base: Failed to open a new connection: 32774[0m
+[1;31mE (7497) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (7497) http_client: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[0;33mW (7507) audio_capture: Failed to send audio data[0m
+[0;32mI (12397) time_fetcher: time_fetcher: time: Wed May 13 10:58:55 2026, Sunday, Asia/Shanghai[0m
+
+***ERROR*** A stack overflow in task Tmr Svc has been detected.
+
+
+Backtrace: 0x40375f0d:0x3fcab260 0x4037e54d:0x3fcab280 0x4037f472:0x3fcab2a0 0x40380e47:0x3fcab320 0x4037f538:0x3fcab340 0x4037f52e:0x0000306d |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 52cfda862
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x2a (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375e4d
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2810,len:0x1564
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xd24
+load:0x403cb700,len:0x2ed4
+entry 0x403c8928
+[0;32mI (26) boot: ESP-IDF v5.4.4 2nd stage bootloader[0m
+[0;32mI (26) boot: compile time May 13 2026 10:54:14[0m
+[0;32mI (26) boot: Multicore bootloader[0m
+[0;32mI (27) boot: chip revision: v0.2[0m
+[0;32mI (29) boot: efuse block revision: v1.3[0m
+[0;32mI (33) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (37) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (40) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (44) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (51) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (64) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (77) boot: End of partition table[0m
+[0;32mI (80) esp_image: segment 0: paddr=00010020 vaddr=3c0b0020 size=22dcch (142796) map[0m
+[0;32mI (113) esp_image: segment 1: paddr=00032df4 vaddr=3fc9c500 size=05644h ( 22084) load[0m
+[0;32mI (118) esp_image: segment 2: paddr=00038440 vaddr=40374000 size=07bd8h ( 31704) load[0m
+[0;32mI (125) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=a843ch (689212) map[0m
+[0;32mI (247) esp_image: segment 4: paddr=000e8464 vaddr=4037bbd8 size=1082ch ( 67628) load[0m
+[0;32mI (262) esp_image: segment 5: paddr=000f8c98 vaddr=50000000 size=0001ch (    28) load[0m
+[0;32mI (272) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (272) boot: Disabling RNG early entropy source...[0m
+[0;32mI (282) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (283) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (283) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (285) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (289) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (293) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (297) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (302) octal_psram: BurstType    : 0x01 (Hybrid Wrap)[0m
+[0;32mI (307) octal_psram: BurstLen     : 0x01 (32 Byte)[0m
+[0;32mI (312) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (317) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (322) MSPI Timing: PSRAM timing tuning index: 5[0m
+[0;32mI (326) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (329) esp_psram: Speed: 80MHz[0m
+[0;32mI (332) cpu_start: Multicore app[0m
+[0;32mI (768) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (776) cpu_start: GPIO 44 and 43 are used as console UART I/O pins[0m
+[0;32mI (777) cpu_start: Pro cpu start user code[0m
+[0;32mI (777) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (778) app_init: Application information:[0m
+[0;32mI (782) app_init: Project name:     wifi_time_reporter[0m
+[0;32mI (787) app_init: App version:      1.0.0[0m
+[0;32mI (791) app_init: Compile time:     May 13 2026 10:47:30[0m
+[0;32mI (796) app_init: ELF file SHA256:  52cfda862...[0m
+[0;32mI (800) app_init: ESP-IDF:          v5.4.4[0m
+[0;32mI (804) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (808) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (812) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (816) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (822) heap_init: At 3FCA6118 len 000435F8 (269 KiB): RAM[0m
+[0;32mI (827) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (832) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (837) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (843) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (850) spi_flash: detected chip: generic[0m
+[0;32mI (853) spi_flash: flash io: dio[0m
+[0;33mW (856) spi_flash: Detected size(8192k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (868) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (874) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (881) main_task: Started on CPU0[0m
+[0;32mI (891) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (891) main_task: Calling app_main()[0m
+[0;32mI (911) time_fetcher: ESP32-S3-EYE WiFi Voice Reporter started[0m
+[0;32mI (911) time_fetcher: Board: ESP32-S3-EYE[0m
+[0;32mI (911) pp: pp rom version: e7ae62f[0m
+[0;32mI (911) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (931) wifi:wifi driver task: 3fcb8ca8, prio:23, stack:6656, core=0[0m
+[0;32mI (941) wifi:wifi firmware version: 8896d66[0m
+[0;32mI (941) wifi:wifi certification version: v7.0[0m
+[0;32mI (941) wifi:config NVS flash: enabled[0m
+[0;32mI (941) wifi:config nano formatting: disabled[0m
+[0;32mI (941) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (951) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (951) wifi:Init management short buffer num: 32[0m
+[0;32mI (951) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (961) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (961) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (971) wifi:Init static rx buffer num: 10[0m
+[0;32mI (971) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (971) wifi_init: rx ba win: 6[0m
+[0;32mI (981) wifi_init: accept mbox: 6[0m
+[0;32mI (981) wifi_init: tcpip mbox: 32[0m
+[0;32mI (981) wifi_init: udp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp tx win: 5760[0m
+[0;32mI (991) wifi_init: tcp rx win: 5760[0m
+[0;32mI (991) wifi_init: tcp mss: 1440[0m
+[0;32mI (1001) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1001) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1011) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10[0m
+[0;32mI (1061) wifi:mode : sta (94:a9:90:1c:70:9c)[0m
+[0;32mI (1061) wifi:enable tsf[0m
+[0;32mI (1061) time_fetcher: WiFi STA mode initialized, connecting...[0m
+[0;32mI (1081) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1081) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1111) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (1161) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (1211) wifi:connected with 431, aid = 7, channel 6, BW20, bssid = 3c:cd:57:f9:76:82[0m
+[0;32mI (1211) wifi:security: WPA2-PSK, phy: bgn, rssi: -32, cipher(pairwise:0x3, group:0x3), pmf:0[0m
+[0;32mI (1221) wifi:pm start, type: 1[0m
+
+[0;32mI (1221) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (1231) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (1261) wifi:<ba-add>idx:0 (ifx:0, 3c:cd:57:f9:76:82), tid:7, ssn:0, winSize:64[0m
+[0;32mI (1291) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (2391) esp_netif_handlers: sta ip: 10.1.41.140, mask: 255.255.255.0, gw: 10.1.41.254[0m
+[0;32mI (2391) time_fetcher: Got IP: 10.1.41.140[0m
+[0;32mI (2391) time_fetcher: Configuring SNTP...[0m
+[0;32mI (2391) time_fetcher: SNTP configured, time will be synced automatically[0m
+[0;32mI (2401) time_fetcher: Connected to AP SSID:'431'[0m
+[0;32mI (2401) audio_capture: I2S PDM microphone initialized[0m
+[0;32mI (2411) http_server: Starting HTTP server...[0m
+[0;32mI (2411) http_server: HTTP server started. Access http://10.1.41.140/[0m
+[0;32mI (2421) audio_capture: Audio capture task started[0m
+[0;32mI (2421) time_fetcher: Print timer started (10s interval)[0m
+[0;32mI (2531) wifi:<ba-add>idx:1 (ifx:0, 3c:cd:57:f9:76:82), tid:0, ssn:1, winSize:64[0m
+[1;31mE (7521) esp-tls: [sock=57] select() timeout[0m
+[1;31mE (7521) transport_base: Failed to open a new connection: 32774[0m
+[1;31mE (7521) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (7521) http_client: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[0;33mW (7531) audio_capture: Failed to send audio data[0m
+[0;32mI (12421) time_fetcher: time_fetcher: time: Wed May 13 10:59:08 2026, Sunday, Asia/Shanghai[0m
+
+***ERROR*** A stack overflow in task Tmr Svc has been detected.
+
+
+Backtrace: 0x40375f0d:0x3fcab260 0x4037e54d:0x3fcab280 0x4037f472:0x3fcab2a0 0x40380e47:0x3fcab320 0x4037f538:0x3fcab340 0x4037f52e:0x00003085 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 52cfda862
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x2a (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375e4d
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2810,len:0x1564
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xd24
+load:0x403cb700,len:0x2ed4
+entry 0x403c8928
+[0;32mI (26) boot: ESP-IDF v5.4.4 2nd stage bootloader[0m
+[0;32mI (26) boot: compile time May 13 2026 10:54:14[0m
+[0;32mI (26) boot: Multicore bootloader[0m
+[0;32mI (27) boot: chip revision: v0.2[0m
+[0;32mI (29) boot: efuse block revision: v1.3[0m
+[0;32mI (33) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (37) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (40) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (44) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (51) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (64) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (77) boot: End of partition table[0m
+[0;32mI (80) esp_image: segment 0: paddr=00010020 vaddr=3c0b0020 size=22dcch (142796) map[0m
+[0;32mI (113) esp_image: segment 1: paddr=00032df4 vaddr=3fc9c500 size=05644h ( 22084) load[0m
+[0;32mI (118) esp_image: segment 2: paddr=00038440 vaddr=40374000 size=07bd8h ( 31704) load[0m
+[0;32mI (125) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=a843ch (689212) map[0m
+[0;32mI (247) esp_image: segment 4: paddr=000e8464 vaddr=4037bbd8 size=1082ch ( 67628) load[0m
+[0;32mI (262) esp_image: segment 5: paddr=000f8c98 vaddr=50000000 size=0001ch (    28) load[0m
+[0;32mI (272) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (272) boot: Disabling RNG early entropy source...[0m
+[0;32mI (282) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (282) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (283) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (285) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (289) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (293) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (297) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (302) octal_psram: BurstType    : 0x01 (Hybrid Wrap)[0m
+[0;32mI (307) octal_psram: BurstLen     : 0x01 (32 Byte)[0m
+[0;32mI (312) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (317) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (322) MSPI Timing: PSRAM timing tuning index: 5[0m
+[0;32mI (325) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (329) esp_psram: Speed: 80MHz[0m
+[0;32mI (332) cpu_start: Multicore app[0m
+[0;32mI (768) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (776) cpu_start: GPIO 44 and 43 are used as console UART I/O pins[0m
+[0;32mI (777) cpu_start: Pro cpu start user code[0m
+[0;32mI (777) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (778) app_init: Application information:[0m
+[0;32mI (782) app_init: Project name:     wifi_time_reporter[0m
+[0;32mI (787) app_init: App version:      1.0.0[0m
+[0;32mI (791) app_init: Compile time:     May 13 2026 10:47:30[0m
+[0;32mI (796) app_init: ELF file SHA256:  52cfda862...[0m
+[0;32mI (800) app_init: ESP-IDF:          v5.4.4[0m
+[0;32mI (804) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (808) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (812) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (816) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (822) heap_init: At 3FCA6118 len 000435F8 (269 KiB): RAM[0m
+[0;32mI (827) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (832) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (837) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (843) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (850) spi_flash: detected chip: generic[0m
+[0;32mI (853) spi_flash: flash io: dio[0m
+[0;33mW (856) spi_flash: Detected size(8192k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (868) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (874) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (881) main_task: Started on CPU0[0m
+[0;32mI (891) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (891) main_task: Calling app_main()[0m
+[0;32mI (911) time_fetcher: ESP32-S3-EYE WiFi Voice Reporter started[0m
+[0;32mI (911) time_fetcher: Board: ESP32-S3-EYE[0m
+[0;32mI (911) pp: pp rom version: e7ae62f[0m
+[0;32mI (911) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (931) wifi:wifi driver task: 3fcb8ca8, prio:23, stack:6656, core=0[0m
+[0;32mI (941) wifi:wifi firmware version: 8896d66[0m
+[0;32mI (941) wifi:wifi certification version: v7.0[0m
+[0;32mI (941) wifi:config NVS flash: enabled[0m
+[0;32mI (941) wifi:config nano formatting: disabled[0m
+[0;32mI (941) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (951) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (951) wifi:Init management short buffer num: 32[0m
+[0;32mI (951) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (961) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (961) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (971) wifi:Init static rx buffer num: 10[0m
+[0;32mI (971) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (971) wifi_init: rx ba win: 6[0m
+[0;32mI (981) wifi_init: accept mbox: 6[0m
+[0;32mI (981) wifi_init: tcpip mbox: 32[0m
+[0;32mI (981) wifi_init: udp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp tx win: 5760[0m
+[0;32mI (991) wifi_init: tcp rx win: 5760[0m
+[0;32mI (991) wifi_init: tcp mss: 1440[0m
+[0;32mI (1001) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1001) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1011) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10[0m
+[0;32mI (1051) wifi:mode : sta (94:a9:90:1c:70:9c)[0m
+[0;32mI (1051) wifi:enable tsf[0m
+[0;32mI (1051) time_fetcher: WiFi STA mode initialized, connecting...[0m
+[0;32mI (1071) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1071) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1101) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (1111) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (1171) wifi:connected with 431, aid = 7, channel 6, BW20, bssid = 3c:cd:57:f9:76:82[0m
+[0;32mI (1181) wifi:security: WPA2-PSK, phy: bgn, rssi: -33, cipher(pairwise:0x3, group:0x3), pmf:0[0m
+[0;32mI (1181) wifi:pm start, type: 1[0m
+
+[0;32mI (1181) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (1191) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (1221) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (1241) wifi:<ba-add>idx:0 (ifx:0, 3c:cd:57:f9:76:82), tid:7, ssn:0, winSize:64[0m
+[0;32mI (2291) esp_netif_handlers: sta ip: 10.1.41.140, mask: 255.255.255.0, gw: 10.1.41.254[0m
+[0;32mI (2291) time_fetcher: Got IP: 10.1.41.140[0m
+[0;32mI (2291) time_fetcher: Configuring SNTP...[0m
+[0;32mI (2291) time_fetcher: SNTP configured, time will be synced automatically[0m
+[0;32mI (2301) time_fetcher: Connected to AP SSID:'431'[0m
+[0;32mI (2301) audio_capture: I2S PDM microphone initialized[0m
+[0;32mI (2311) http_server: Starting HTTP server...[0m
+[0;32mI (2311) http_server: HTTP server started. Access http://10.1.41.140/[0m
+[0;32mI (2321) audio_capture: Audio capture task started[0m
+[0;32mI (2321) time_fetcher: Print timer started (10s interval)[0m
+[0;32mI (2431) wifi:<ba-add>idx:1 (ifx:0, 3c:cd:57:f9:76:82), tid:0, ssn:2, winSize:64[0m
+[1;31mE (7421) esp-tls: [sock=57] select() timeout[0m
+[1;31mE (7421) transport_base: Failed to open a new connection: 32774[0m
+[1;31mE (7421) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (7421) http_client: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[0;33mW (7431) audio_capture: Failed to send audio data[0m
+[0;32mI (12321) time_fetcher: time_fetcher: time: Wed May 13 10:59:20 2026, Sunday, Asia/Shanghai[0m
+
+***ERROR*** A stack overflow in task Tmr Svc has been detected.
+
+
+Backtrace: 0x40375f0d:0x3fcab260 0x4037e54d:0x3fcab280 0x4037f472:0x3fcab2a0 0x40380e47:0x3fcab320 0x4037f538:0x3fcab340 0x4037f52e:0x00003021 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 52cfda862
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x2a (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375e4d
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2810,len:0x1564
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xd24
+load:0x403cb700,len:0x2ed4
+entry 0x403c8928
+[0;32mI (26) boot: ESP-IDF v5.4.4 2nd stage bootloader[0m
+[0;32mI (26) boot: compile time May 13 2026 10:54:14[0m
+[0;32mI (26) boot: Multicore bootloader[0m
+[0;32mI (27) boot: chip revision: v0.2[0m
+[0;32mI (29) boot: efuse block revision: v1.3[0m
+[0;32mI (33) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (37) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (40) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (44) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (51) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (64) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (77) boot: End of partition table[0m
+[0;32mI (80) esp_image: segment 0: paddr=00010020 vaddr=3c0b0020 size=22dcch (142796) map[0m
+[0;32mI (113) esp_image: segment 1: paddr=00032df4 vaddr=3fc9c500 size=05644h ( 22084) load[0m
+[0;32mI (118) esp_image: segment 2: paddr=00038440 vaddr=40374000 size=07bd8h ( 31704) load[0m
+[0;32mI (125) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=a843ch (689212) map[0m
+[0;32mI (247) esp_image: segment 4: paddr=000e8464 vaddr=4037bbd8 size=1082ch ( 67628) load[0m
+[0;32mI (262) esp_image: segment 5: paddr=000f8c98 vaddr=50000000 size=0001ch (    28) load[0m
+[0;32mI (272) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (272) boot: Disabling RNG early entropy source...[0m
+[0;32mI (282) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (282) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (283) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (285) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (289) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (293) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (297) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (302) octal_psram: BurstType    : 0x01 (Hybrid Wrap)[0m
+[0;32mI (307) octal_psram: BurstLen     : 0x01 (32 Byte)[0m
+[0;32mI (312) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (317) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (322) MSPI Timing: PSRAM timing tuning index: 5[0m
+[0;32mI (325) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (329) esp_psram: Speed: 80MHz[0m
+[0;32mI (332) cpu_start: Multicore app[0m
+[0;32mI (768) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (776) cpu_start: GPIO 44 and 43 are used as console UART I/O pins[0m
+[0;32mI (777) cpu_start: Pro cpu start user code[0m
+[0;32mI (777) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (778) app_init: Application information:[0m
+[0;32mI (782) app_init: Project name:     wifi_time_reporter[0m
+[0;32mI (787) app_init: App version:      1.0.0[0m
+[0;32mI (791) app_init: Compile time:     May 13 2026 10:47:30[0m
+[0;32mI (796) app_init: ELF file SHA256:  52cfda862...[0m
+[0;32mI (800) app_init: ESP-IDF:          v5.4.4[0m
+[0;32mI (804) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (808) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (812) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (816) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (822) heap_init: At 3FCA6118 len 000435F8 (269 KiB): RAM[0m
+[0;32mI (827) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (832) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (837) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (843) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (850) spi_flash: detected chip: generic[0m
+[0;32mI (853) spi_flash: flash io: dio[0m
+[0;33mW (856) spi_flash: Detected size(8192k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (868) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (874) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (881) main_task: Started on CPU0[0m
+[0;32mI (891) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (891) main_task: Calling app_main()[0m
+[0;32mI (911) time_fetcher: ESP32-S3-EYE WiFi Voice Reporter started[0m
+[0;32mI (911) time_fetcher: Board: ESP32-S3-EYE[0m
+[0;32mI (911) pp: pp rom version: e7ae62f[0m
+[0;32mI (911) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (931) wifi:wifi driver task: 3fcb8ca8, prio:23, stack:6656, core=0[0m
+[0;32mI (941) wifi:wifi firmware version: 8896d66[0m
+[0;32mI (941) wifi:wifi certification version: v7.0[0m
+[0;32mI (941) wifi:config NVS flash: enabled[0m
+[0;32mI (941) wifi:config nano formatting: disabled[0m
+[0;32mI (941) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (951) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (951) wifi:Init management short buffer num: 32[0m
+[0;32mI (951) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (961) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (961) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (971) wifi:Init static rx buffer num: 10[0m
+[0;32mI (971) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (971) wifi_init: rx ba win: 6[0m
+[0;32mI (981) wifi_init: accept mbox: 6[0m
+[0;32mI (981) wifi_init: tcpip mbox: 32[0m
+[0;32mI (981) wifi_init: udp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp tx win: 5760[0m
+[0;32mI (991) wifi_init: tcp rx win: 5760[0m
+[0;32mI (991) wifi_init: tcp mss: 1440[0m
+[0;32mI (1001) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1001) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1011) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10[0m
+[0;32mI (1051) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)[0m
+[0;32mI (1061) wifi:mode : sta (94:a9:90:1c:70:9c)[0m
+[0;32mI (1061) wifi:enable tsf[0m
+[0;32mI (1071) time_fetcher: WiFi STA mode initialized, connecting...[0m
+[0;32mI (1081) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1081) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1141) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (1211) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (1241) wifi:connected with 431, aid = 7, channel 6, BW20, bssid = 3c:cd:57:f9:76:82[0m
+[0;32mI (1241) wifi:security: WPA2-PSK, phy: bgn, rssi: -38, cipher(pairwise:0x3, group:0x3), pmf:0[0m
+[0;32mI (1241) wifi:pm start, type: 1[0m
+
+[0;32mI (1251) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (1251) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (1271) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (1391) wifi:<ba-add>idx:0 (ifx:0, 3c:cd:57:f9:76:82), tid:7, ssn:0, winSize:64[0m
+[0;32mI (2581) esp_netif_handlers: sta ip: 10.1.41.140, mask: 255.255.255.0, gw: 10.1.41.254[0m
+[0;32mI (2581) time_fetcher: Got IP: 10.1.41.140[0m
+[0;32mI (2581) time_fetcher: Configuring SNTP...[0m
+[0;32mI (2581) time_fetcher: SNTP configured, time will be synced automatically[0m
+[0;32mI (2591) time_fetcher: Connected to AP SSID:'431'[0m
+[0;32mI (2591) audio_capture: I2S PDM microphone initialized[0m
+[0;32mI (2601) http_server: Starting HTTP server...[0m
+[0;32mI (2601) http_server: HTTP server started. Access http://10.1.41.140/[0m
+[0;32mI (2611) audio_capture: Audio capture task started[0m
+[0;32mI (2611) time_fetcher: Print timer started (10s interval)[0m
+[0;32mI (2711) wifi:<ba-add>idx:1 (ifx:0, 3c:cd:57:f9:76:82), tid:0, ssn:1, winSize:64[0m
+[1;31mE (7711) esp-tls: [sock=57] select() timeout[0m
+[1;31mE (7711) transport_base: Failed to open a new connection: 32774[0m
+[1;31mE (7711) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (7711) http_client: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[0;33mW (7721) audio_capture: Failed to send audio data[0m
+[0;32mI (12611) time_fetcher: time_fetcher: time: Wed May 13 10:59:33 2026, Sunday, Asia/Shanghai[0m
+
+***ERROR*** A stack overflow in task Tmr Svc has been detected.
+
+
+Backtrace: 0x40375f0d:0x3fcab260 0x4037e54d:0x3fcab280 0x4037f472:0x3fcab2a0 0x40380e47:0x3fcab320 0x4037f538:0x3fcab340 0x4037f52e:0x00003143 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 52cfda862
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x2a (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375e4d
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2810,len:0x1564
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xd24
+load:0x403cb700,len:0x2ed4
+entry 0x403c8928
+[0;32mI (26) boot: ESP-IDF v5.4.4 2nd stage bootloader[0m
+[0;32mI (26) boot: compile time May 13 2026 10:54:14[0m
+[0;32mI (26) boot: Multicore bootloader[0m
+[0;32mI (27) boot: chip revision: v0.2[0m
+[0;32mI (29) boot: efuse block revision: v1.3[0m
+[0;32mI (33) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (37) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (40) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (44) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (51) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (64) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (77) boot: End of partition table[0m
+[0;32mI (80) esp_image: segment 0: paddr=00010020 vaddr=3c0b0020 size=22dcch (142796) map[0m
+[0;32mI (113) esp_image: segment 1: paddr=00032df4 vaddr=3fc9c500 size=05644h ( 22084) load[0m
+[0;32mI (118) esp_image: segment 2: paddr=00038440 vaddr=40374000 size=07bd8h ( 31704) load[0m
+[0;32mI (125) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=a843ch (689212) map[0m
+[0;32mI (247) esp_image: segment 4: paddr=000e8464 vaddr=4037bbd8 size=1082ch ( 67628) load[0m
+[0;32mI (262) esp_image: segment 5: paddr=000f8c98 vaddr=50000000 size=0001ch (    28) load[0m
+[0;32mI (272) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (272) boot: Disabling RNG early entropy source...[0m
+[0;32mI (282) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (282) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (283) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (285) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (289) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (293) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (297) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (302) octal_psram: BurstType    : 0x01 (Hybrid Wrap)[0m
+[0;32mI (307) octal_psram: BurstLen     : 0x01 (32 Byte)[0m
+[0;32mI (312) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (317) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (322) MSPI Timing: PSRAM timing tuning index: 5[0m
+[0;32mI (325) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (329) esp_psram: Speed: 80MHz[0m
+[0;32mI (332) cpu_start: Multicore app[0m
+[0;32mI (768) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (776) cpu_start: GPIO 44 and 43 are used as console UART I/O pins[0m
+[0;32mI (777) cpu_start: Pro cpu start user code[0m
+[0;32mI (777) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (778) app_init: Application information:[0m
+[0;32mI (782) app_init: Project name:     wifi_time_reporter[0m
+[0;32mI (787) app_init: App version:      1.0.0[0m
+[0;32mI (791) app_init: Compile time:     May 13 2026 10:47:30[0m
+[0;32mI (796) app_init: ELF file SHA256:  52cfda862...[0m
+[0;32mI (800) app_init: ESP-IDF:          v5.4.4[0m
+[0;32mI (804) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (808) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (812) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (816) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (822) heap_init: At 3FCA6118 len 000435F8 (269 KiB): RAM[0m
+[0;32mI (827) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (832) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (837) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (843) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (850) spi_flash: detected chip: generic[0m
+[0;32mI (853) spi_flash: flash io: dio[0m
+[0;33mW (856) spi_flash: Detected size(8192k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (868) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (874) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (881) main_task: Started on CPU0[0m
+[0;32mI (891) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (891) main_task: Calling app_main()[0m
+[0;32mI (911) time_fetcher: ESP32-S3-EYE WiFi Voice Reporter started[0m
+[0;32mI (911) time_fetcher: Board: ESP32-S3-EYE[0m
+[0;32mI (911) pp: pp rom version: e7ae62f[0m
+[0;32mI (911) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (931) wifi:wifi driver task: 3fcb8ca8, prio:23, stack:6656, core=0[0m
+[0;32mI (941) wifi:wifi firmware version: 8896d66[0m
+[0;32mI (941) wifi:wifi certification version: v7.0[0m
+[0;32mI (941) wifi:config NVS flash: enabled[0m
+[0;32mI (941) wifi:config nano formatting: disabled[0m
+[0;32mI (941) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (951) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (951) wifi:Init management short buffer num: 32[0m
+[0;32mI (951) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (961) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (961) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (971) wifi:Init static rx buffer num: 10[0m
+[0;32mI (971) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (971) wifi_init: rx ba win: 6[0m
+[0;32mI (981) wifi_init: accept mbox: 6[0m
+[0;32mI (981) wifi_init: tcpip mbox: 32[0m
+[0;32mI (981) wifi_init: udp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp tx win: 5760[0m
+[0;32mI (991) wifi_init: tcp rx win: 5760[0m
+[0;32mI (991) wifi_init: tcp mss: 1440[0m
+[0;32mI (1001) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1001) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1011) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10[0m
+[0;32mI (1051) wifi:mode : sta (94:a9:90:1c:70:9c)[0m
+[0;32mI (1051) wifi:enable tsf[0m
+[0;32mI (1051) time_fetcher: WiFi STA mode initialized, connecting...[0m
+[0;32mI (1071) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1071) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1101) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (1141) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (1191) wifi:connected with 431, aid = 7, channel 6, BW20, bssid = 3c:cd:57:f9:76:82[0m
+[0;32mI (1191) wifi:security: WPA2-PSK, phy: bgn, rssi: -40, cipher(pairwise:0x3, group:0x3), pmf:0[0m
+[0;32mI (1201) wifi:pm start, type: 1[0m
+
+[0;32mI (1201) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (1211) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (1221) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (1271) wifi:<ba-add>idx:0 (ifx:0, 3c:cd:57:f9:76:82), tid:7, ssn:0, winSize:64[0m
+[0;32mI (1361) wifi:<ba-add>idx:1 (ifx:0, 3c:cd:57:f9:76:82), tid:0, ssn:1, winSize:64[0m
+[0;32mI (2301) esp_netif_handlers: sta ip: 10.1.41.140, mask: 255.255.255.0, gw: 10.1.41.254[0m
+[0;32mI (2301) time_fetcher: Got IP: 10.1.41.140[0m
+[0;32mI (2301) time_fetcher: Configuring SNTP...[0m
+[0;32mI (2301) time_fetcher: SNTP configured, time will be synced automatically[0m
+[0;32mI (2311) time_fetcher: Connected to AP SSID:'431'[0m
+[0;32mI (2311) audio_capture: I2S PDM microphone initialized[0m
+[0;32mI (2321) http_server: Starting HTTP server...[0m
+[0;32mI (2321) http_server: HTTP server started. Access http://10.1.41.140/[0m
+[0;32mI (2331) audio_capture: Audio capture task started[0m
+[0;32mI (2331) time_fetcher: Print timer started (10s interval)[0m
+[1;31mE (7431) esp-tls: [sock=57] select() timeout[0m
+[1;31mE (7431) transport_base: Failed to open a new connection: 32774[0m
+[1;31mE (7431) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (7431) http_client: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[0;33mW (7441) audio_capture: Failed to send audio data[0m
+[0;32mI (12331) time_fetcher: time_fetcher: time: Wed May 13 10:59:45 2026, Sunday, Asia/Shanghai[0m
+
+***ERROR*** A stack overflow in task Tmr Svc has been detected.
+
+
+Backtrace: 0x40375f0d:0x3fcab260 0x4037e54d:0x3fcab280 0x4037f472:0x3fcab2a0 0x40380e47:0x3fcab320 0x4037f538:0x3fcab340 0x4037f52e:0x0000302b |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 52cfda862
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x2a (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375e4d
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2810,len:0x1564
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xd24
+load:0x403cb700,len:0x2ed4
+entry 0x403c8928
+[0;32mI (26) boot: ESP-IDF v5.4.4 2nd stage bootloader[0m
+[0;32mI (26) boot: compile time May 13 2026 10:54:14[0m
+[0;32mI (26) boot: Multicore bootloader[0m
+[0;32mI (27) boot: chip revision: v0.2[0m
+[0;32mI (29) boot: efuse block revision: v1.3[0m
+[0;32mI (33) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (37) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (40) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (44) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (51) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (64) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (77) boot: End of partition table[0m
+[0;32mI (80) esp_image: segment 0: paddr=00010020 vaddr=3c0b0020 size=22dcch (142796) map[0m
+[0;32mI (113) esp_image: segment 1: paddr=00032df4 vaddr=3fc9c500 size=05644h ( 22084) load[0m
+[0;32mI (118) esp_image: segment 2: paddr=00038440 vaddr=40374000 size=07bd8h ( 31704) load[0m
+[0;32mI (125) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=a843ch (689212) map[0m
+[0;32mI (247) esp_image: segment 4: paddr=000e8464 vaddr=4037bbd8 size=1082ch ( 67628) load[0m
+[0;32mI (262) esp_image: segment 5: paddr=000f8c98 vaddr=50000000 size=0001ch (    28) load[0m
+[0;32mI (272) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (272) boot: Disabling RNG early entropy source...[0m
+[0;32mI (282) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (282) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (283) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (285) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (289) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (293) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (297) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (302) octal_psram: BurstType    : 0x01 (Hybrid Wrap)[0m
+[0;32mI (307) octal_psram: BurstLen     : 0x01 (32 Byte)[0m
+[0;32mI (312) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (317) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (322) MSPI Timing: PSRAM timing tuning index: 5[0m
+[0;32mI (325) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (329) esp_psram: Speed: 80MHz[0m
+[0;32mI (332) cpu_start: Multicore app[0m
+[0;32mI (768) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (776) cpu_start: GPIO 44 and 43 are used as console UART I/O pins[0m
+[0;32mI (777) cpu_start: Pro cpu start user code[0m
+[0;32mI (777) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (778) app_init: Application information:[0m
+[0;32mI (782) app_init: Project name:     wifi_time_reporter[0m
+[0;32mI (787) app_init: App version:      1.0.0[0m
+[0;32mI (791) app_init: Compile time:     May 13 2026 10:47:30[0m
+[0;32mI (796) app_init: ELF file SHA256:  52cfda862...[0m
+[0;32mI (800) app_init: ESP-IDF:          v5.4.4[0m
+[0;32mI (804) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (808) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (812) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (816) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (822) heap_init: At 3FCA6118 len 000435F8 (269 KiB): RAM[0m
+[0;32mI (827) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (832) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (837) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (843) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (850) spi_flash: detected chip: generic[0m
+[0;32mI (853) spi_flash: flash io: dio[0m
+[0;33mW (856) spi_flash: Detected size(8192k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (868) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (874) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (881) main_task: Started on CPU0[0m
+[0;32mI (891) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (891) main_task: Calling app_main()[0m
+[0;32mI (911) time_fetcher: ESP32-S3-EYE WiFi Voice Reporter started[0m
+[0;32mI (911) time_fetcher: Board: ESP32-S3-EYE[0m
+[0;32mI (911) pp: pp rom version: e7ae62f[0m
+[0;32mI (911) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (931) wifi:wifi driver task: 3fcb8ca8, prio:23, stack:6656, core=0[0m
+[0;32mI (941) wifi:wifi firmware version: 8896d66[0m
+[0;32mI (941) wifi:wifi certification version: v7.0[0m
+[0;32mI (941) wifi:config NVS flash: enabled[0m
+[0;32mI (941) wifi:config nano formatting: disabled[0m
+[0;32mI (941) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (951) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (951) wifi:Init management short buffer num: 32[0m
+[0;32mI (951) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (961) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (961) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (971) wifi:Init static rx buffer num: 10[0m
+[0;32mI (971) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (971) wifi_init: rx ba win: 6[0m
+[0;32mI (981) wifi_init: accept mbox: 6[0m
+[0;32mI (981) wifi_init: tcpip mbox: 32[0m
+[0;32mI (981) wifi_init: udp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp tx win: 5760[0m
+[0;32mI (991) wifi_init: tcp rx win: 5760[0m
+[0;32mI (991) wifi_init: tcp mss: 1440[0m
+[0;32mI (1001) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1001) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1011) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10[0m
+[0;32mI (1051) wifi:mode : sta (94:a9:90:1c:70:9c)[0m
+[0;32mI (1051) wifi:enable tsf[0m
+[0;32mI (1061) time_fetcher: WiFi STA mode initialized, connecting...[0m
+[0;32mI (1071) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1071) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1121) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (1171) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (1201) wifi:connected with 431, aid = 7, channel 6, BW20, bssid = 3c:cd:57:f9:76:82[0m
+[0;32mI (1201) wifi:security: WPA2-PSK, phy: bgn, rssi: -43, cipher(pairwise:0x3, group:0x3), pmf:0[0m
+[0;32mI (1211) wifi:pm start, type: 1[0m
+
+[0;32mI (1211) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (1221) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (1251) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (1261) wifi:<ba-add>idx:0 (ifx:0, 3c:cd:57:f9:76:82), tid:7, ssn:0, winSize:64[0m
+[0;32mI (2311) esp_netif_handlers: sta ip: 10.1.41.140, mask: 255.255.255.0, gw: 10.1.41.254[0m
+[0;32mI (2311) time_fetcher: Got IP: 10.1.41.140[0m
+[0;32mI (2311) time_fetcher: Configuring SNTP...[0m
+[0;32mI (2311) time_fetcher: SNTP configured, time will be synced automatically[0m
+[0;32mI (2321) time_fetcher: Connected to AP SSID:'431'[0m
+[0;32mI (2321) audio_capture: I2S PDM microphone initialized[0m
+[0;32mI (2331) http_server: Starting HTTP server...[0m
+[0;32mI (2331) http_server: HTTP server started. Access http://10.1.41.140/[0m
+[0;32mI (2341) audio_capture: Audio capture task started[0m
+[0;32mI (2341) time_fetcher: Print timer started (10s interval)[0m
+[0;32mI (2441) wifi:<ba-add>idx:1 (ifx:0, 3c:cd:57:f9:76:82), tid:0, ssn:1, winSize:64[0m
+[1;31mE (7441) esp-tls: [sock=57] select() timeout[0m
+[1;31mE (7441) transport_base: Failed to open a new connection: 32774[0m
+[1;31mE (7441) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (7441) http_client: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[0;33mW (7451) audio_capture: Failed to send audio data[0m

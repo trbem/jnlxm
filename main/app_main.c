@@ -644,8 +644,8 @@ void app_main(void)
         ESP_LOGE(AUDIO_TAG, "Failed to create audio queue");
     }
     
-    /* 创建音频采集任务 (栈空间4096字节) */
-    xTaskCreate(audio_capture_task, "audio_capture", 4096, NULL, 5, NULL);
+    /* 创建音频采集任务 (栈空间8192字节) */
+    xTaskCreate(audio_capture_task, "audio_capture", 8192, NULL, 5, NULL);
     
     /* 创建HTTP发送任务 (栈空间16384字节，esp_http_client需要大量栈) */
     if (s_audio_queue != NULL) {

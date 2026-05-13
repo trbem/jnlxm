@@ -64,8 +64,8 @@ typedef struct {
 } audio_packet_t;
 
 /* PC语音识别服务器地址 (端口8087) */
-#define VOICE_SERVER_URL "http://19.1.41.99:8087/voice"
-#define VOICE_SERVER_IP "19.1.41.99"
+#define VOICE_SERVER_URL "http://10.1.41.99:8087/voice"
+#define VOICE_SERVER_IP "10.1.41.99"
 #define VOICE_SERVER_PORT 8087
 
 /* 文字回复存储 */

@@ -321,8 +321,6 @@ static void audio_capture_task(void *pvParameters)
 static void audio_http_send_task(void *pvParameters)
 {
     audio_packet_t *packet = NULL;
-    static esp_http_client_handle_t client = NULL;
-    static int init_done = 0;
     
     ESP_LOGI(AUDIO_TAG, "HTTP send task started");
     
@@ -333,40 +331,60 @@ static void audio_http_send_task(void *pvParameters)
                 continue;
             }
             
-            /* 初始化HTTP客户端(仅第一次) */
-            if (!init_done) {
-                esp_http_client_config_t config = {
-                    .url = VOICE_SERVER_URL,
-                    .method = HTTP_METHOD_POST,
-                    .timeout_ms = 3000,
-                };
-                client = esp_http_client_init(&config);
-                if (client) {
-                    init_done = 1;
-                    ESP_LOGI(AUDIO_TAG, "HTTP client initialized");
+            /* 每次请求都创建新的HTTP客户端，避免Connection reset问题 */
+            esp_http_client_config_t config = {
+                .url = VOICE_SERVER_URL,
+                .method = HTTP_METHOD_POST,
+                .timeout_ms = 5000,
+                .disable_auto_redirect = false,
+            };
+            
+            esp_http_client_handle_t client = esp_http_client_init(&config);
+            if (client == NULL) {
+                ESP_LOGE(HTTP_CLIENT_TAG, "Failed to init HTTP client");
+                free(packet->data);
+                free(packet);
+                continue;
+            }
+            
+            /* 设置请求头 */
+            esp_http_client_set_header(client, "Content-Type", "application/octet-stream");
+            
+            /* 打开连接 */
+            esp_err_t err = esp_http_client_open(client, packet->length);
+            if (err != ESP_OK) {
+                ESP_LOGE(HTTP_CLIENT_TAG, "Open failed: %s", esp_err_to_name(err));
+                esp_http_client_cleanup(client);
+                free(packet->data);
+                free(packet);
+                vTaskDelay(pdMS_TO_TICKS(100));
+                continue;
+            }
+            
+            /* 写入音频数据 */
+            int written = esp_http_client_write(client, (char *)packet->data, packet->length);
+            if (written < 0) {
+                ESP_LOGE(HTTP_CLIENT_TAG, "Write failed");
+            } else {
+                /* 获取响应头 */
+                int status_code = esp_http_client_fetch_headers(client);
+                if (status_code >= 200 && status_code < 300) {
+                    ESP_LOGI(HTTP_CLIENT_TAG, "Send OK, status %d", status_code);
+                } else {
+                    ESP_LOGW(HTTP_CLIENT_TAG, "Status %d", status_code);
                 }
             }
             
-            /* 发送音频数据 */
-            if (client != NULL && init_done) {
-                esp_err_t err = esp_http_client_open(client, packet->length);
-                if (err == ESP_OK) {
-                    int written = esp_http_client_write(client, (char *)packet->data, packet->length);
-                    if (written > 0) {
-                        esp_http_client_fetch_headers(client);
-                    } else {
-                        esp_http_client_cleanup(client);
-                        init_done = 0;
-                    }
-                } else {
-                    esp_http_client_cleanup(client);
-                    init_done = 0;
-                }
-            }
+            /* 关闭并清理连接 */
+            esp_http_client_close(client);
+            esp_http_client_cleanup(client);
             
             /* 释放数据包内存 */
             free(packet->data);
             free(packet);
+            
+            /* 短暂延迟避免连接过于频繁 */
+            vTaskDelay(pdMS_TO_TICKS(10));
         }
     }
 }

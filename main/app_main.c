@@ -568,8 +568,8 @@ void app_main(void)
     /* 启动HTTP服务器 */
     start_http_server();
     
-    /* 创建音频采集任务 (栈空间12288字节) */
-    xTaskCreate(audio_capture_task, "audio_capture", 12288, NULL, 5, NULL);
+    /* 创建音频采集任务 (栈空间16384字节，解决esp_http_client栈溢出) */
+    xTaskCreate(audio_capture_task, "audio_capture", 16384, NULL, 5, NULL);
     
     /* 创建定期打印时间定时器 (每10秒) */
     TimerHandle_t print_timer = xTimerCreate("print_timer",

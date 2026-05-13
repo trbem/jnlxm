@@ -53,8 +53,8 @@ static httpd_handle_t server = NULL;
 /* 音频配置 */
 #define AUDIO_SAMPLE_RATE 16000
 #define AUDIO_BYTE_RATE (AUDIO_SAMPLE_RATE * 2)  // 16-bit mono
-#define AUDIO_BUFFER_SIZE 3200  // 100ms of audio data
-#define AUDIO_SEND_INTERVAL_MS 100
+#define AUDIO_BUFFER_SIZE 1600  // 50ms of audio data (减少栈使用)
+#define AUDIO_SEND_INTERVAL_MS 50
 
 /* PC语音识别服务器地址 (端口8087) */
 #define VOICE_SERVER_URL "http://19.1.41.99:8087/voice"
@@ -207,45 +207,58 @@ static void init_i2s_microphone(void)
     ESP_LOGI(AUDIO_TAG, "I2S PDM microphone initialized");
 }
 
-/* 发送音频数据到PC语音识别服务器 */
+/* 发送音频数据到PC语音识别服务器 - 使用持久连接减少栈消耗 */
 static esp_err_t send_audio_to_server(uint8_t *data, size_t length)
 {
     if (!s_wifi_connected) {
         return ESP_FAIL;
     }
     
-    esp_http_client_config_t config = {
-        .url = VOICE_SERVER_URL,
-        .method = HTTP_METHOD_POST,
-        .timeout_ms = 5000,
-    };
+    /* 使用静态变量保持连接 */
+    static esp_http_client_handle_t client = NULL;
+    static char url_buf[128];
+    static int init_done = 0;
     
-    esp_http_client_handle_t client = esp_http_client_init(&config);
-    if (client == NULL) {
-        ESP_LOGE(HTTP_CLIENT_TAG, "Failed to initialize HTTP client");
-        return ESP_FAIL;
+    if (!init_done) {
+        esp_http_client_config_t config = {
+            .url = VOICE_SERVER_URL,
+            .method = HTTP_METHOD_POST,
+            .timeout_ms = 3000,
+            .disable_auto_redirect = false,
+        };
+        
+        client = esp_http_client_init(&config);
+        if (client == NULL) {
+            ESP_LOGE(HTTP_CLIENT_TAG, "Failed to initialize HTTP client");
+            return ESP_FAIL;
+        }
+        init_done = 1;
     }
     
+    /* 设置请求内容长度 */
+    esp_http_client_set_header(client, "Content-Type", "application/octet-stream");
     esp_err_t err = esp_http_client_open(client, length);
     if (err != ESP_OK) {
-        ESP_LOGE(HTTP_CLIENT_TAG, "Failed to open HTTP connection: %s", esp_err_to_name(err));
+        ESP_LOGW(HTTP_CLIENT_TAG, "Open failed: %s, retrying...", esp_err_to_name(err));
         esp_http_client_cleanup(client);
+        init_done = 0;
         return ESP_FAIL;
     }
     
     int written = esp_http_client_write(client, (char *)data, length);
     if (written < 0) {
-        ESP_LOGE(HTTP_CLIENT_TAG, "Failed to write audio data");
+        ESP_LOGW(HTTP_CLIENT_TAG, "Write failed");
         esp_http_client_cleanup(client);
+        init_done = 0;
         return ESP_FAIL;
     }
     
     int status_code = esp_http_client_fetch_headers(client);
     if (status_code < 200 || status_code >= 300) {
-        ESP_LOGW(HTTP_CLIENT_TAG, "Server returned status %d", status_code);
+        ESP_LOGW(HTTP_CLIENT_TAG, "Status %d", status_code);
     }
     
-    esp_http_client_cleanup(client);
+    esp_http_client_close(client);
     return ESP_OK;
 }
 
@@ -555,8 +568,8 @@ void app_main(void)
     /* 启动HTTP服务器 */
     start_http_server();
     
-    /* 创建音频采集任务 (栈空间2048字节) */
-    xTaskCreate(audio_capture_task, "audio_capture", 2048, NULL, 5, NULL);
+    /* 创建音频采集任务 (栈空间12288字节) */
+    xTaskCreate(audio_capture_task, "audio_capture", 12288, NULL, 5, NULL);
     
     /* 创建定期打印时间定时器 (每10秒) */
     TimerHandle_t print_timer = xTimerCreate("print_timer",

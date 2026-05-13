@@ -16,9 +16,6 @@ import threading
 import urllib.request
 import urllib.error
 import io
-import wave
-import numpy as np
-import sounddevice as sd
 from datetime import datetime
 
 # 配置

@@ -18,6 +18,25 @@ import urllib.error
 import io
 from datetime import datetime
 
+# 使用ThreadingHTTPServer支持并发连接和keep-alive
+try:
+    from http.server import ThreadingHTTPServer
+except ImportError:
+    class ThreadingHTTPServer(socketserver.TCPServer, threading.Thread):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+        def process_request(self, request, client_address):
+            t = threading.Thread(target=self.process_request_thread, args=(request, client_address))
+            t.daemon = True
+            t.start()
+        def process_request_thread(self, request, client_address):
+            try:
+                self.finish_request(request, client_address)
+            except Exception:
+                self.handle_error(request, client_address)
+            finally:
+                self.shutdown_request(request)
+
 # 配置
 VOICE_PORT = 8087
 ESP32_HTTP_URL = "http://10.1.41.140:8087/api/reply"  # ESP32的HTTP服务器地址 (端口8087)
@@ -401,7 +420,9 @@ class VoiceRecognitionHandler(http.server.SimpleHTTPRequestHandler):
 
 def run_server():
     """运行HTTP服务器"""
-    with socketserver.TCPServer(("", VOICE_PORT), VoiceRecognitionHandler) as httpd:
+    # 允许地址重用
+    socketserver.TCPServer.allow_reuse_address = True
+    with ThreadingHTTPServer(("", VOICE_PORT), VoiceRecognitionHandler) as httpd:
         print(f"=" * 50)
         print(f"ESP32 语音识别服务器已启动")
         print(f"监听端口: {VOICE_PORT}")

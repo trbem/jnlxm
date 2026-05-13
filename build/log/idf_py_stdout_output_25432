@@ -1,0 +1,685 @@
+[0;32mI (113) esp_image: segment 1: paddr=00032724 vaddr=3fc9c500 sizeESP-ROM:esp32s3-20210327[0m
+Build:Mar 27 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0x2a (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4200d151
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2810,len:0x1564
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xd24
+load:0x403cb700,len:0x2ed4
+entry 0x403c8928
+[0;32mI (26) boot: ESP-IDF v5.4.4 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time May 13 2026 10:54:14[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (27) boot: chip revision: v0.2[0m
+[0;32mI (30) boot: efuse block revision: v1.3[0m
+[0;32mI (33) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (37) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3c0b0020 size=226fch (141052) map[0m
+[0;32mI (113) esp_image: segment 1: paddr=00032724 vaddr=3fc9c500 size=05644h ( 22084) load[0m
+[0;32mI (118) esp_image: segment 2: paddr=00037d70 vaddr=40374000 size=082a8h ( 33448) load[0m
+[0;32mI (126) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=a846ch (689260) map[0m
+[0;32mI (248) esp_image: segment 4: paddr=000e8494 vaddr=4037c2a8 size=1015ch ( 65884) load[0m
+[0;32mI (262) esp_image: segment 5: paddr=000f85f8 vaddr=50000000 size=0001ch (    28) load[0m
+[0;32mI (272) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (272) boot: Disabling RNG early entropy source...[0m
+[0;32mI (283) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (283) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (283) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (285) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (289) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (294) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (298) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (303) octal_psram: BurstType    : 0x01 (Hybrid Wrap)[0m
+[0;32mI (307) octal_psram: BurstLen     : 0x01 (32 Byte)[0m
+[0;32mI (312) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (317) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (322) MSPI Timing: PSRAM timing tuning index: 5[0m
+[0;32mI (326) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (329) esp_psram: Speed: 80MHz[0m
+[0;32mI (332) cpu_start: Multicore app[0m
+[0;32mI (768) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (776) cpu_start: GPIO 44 and 43 are used as console UART I/O pins[0m
+[0;32mI (777) cpu_start: Pro cpu start user code[0m
+[0;32mI (777) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (779) app_init: Application information:[0m
+[0;32mI (782) app_init: Project name:     wifi_time_reporter[0m
+[0;32mI (787) app_init: App version:      1.0.0[0m
+[0;32mI (791) app_init: Compile time:     May 13 2026 12:34:30[0m
+[0;32mI (796) app_init: ELF file SHA256:  9eee3b354...[0m
+[0;32mI (800) app_init: ESP-IDF:          v5.4.4[0m
+[0;32mI (804) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (808) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (812) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (816) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (822) heap_init: At 3FCA7120 len 000425F0 (265 KiB): RAM[0m
+[0;32mI (827) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (832) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (838) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (843) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (850) spi_flash: detected chip: generic[0m
+[0;32mI (853) spi_flash: flash io: dio[0m
+[0;33mW (856) spi_flash: Detected size(8192k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (869) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (875) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (882) main_task: Started on CPU0[0m
+[0;32mI (892) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (892) main_task: Calling app_main()[0m
+[0;32mI (912) time_fetcher: ESP32-S3-EYE WiFi Voice Reporter started[0m
+[0;32mI (912) time_fetcher: Board: ESP32-S3-EYE[0m
+[0;32mI (912) pp: pp rom version: e7ae62f[0m
+[0;32mI (912) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (932) wifi:wifi driver task: 3fcb9cb0, prio:23, stack:6656, core=0[0m
+[0;32mI (942) wifi:wifi firmware version: 8896d66[0m
+[0;32mI (942) wifi:wifi certification version: v7.0[0m
+[0;32mI (942) wifi:config NVS flash: enabled[0m
+[0;32mI (942) wifi:config nano formatting: disabled[0m
+[0;32mI (942) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (952) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (952) wifi:Init management short buffer num: 32[0m
+[0;32mI (952) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (962) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (962) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (972) wifi:Init static rx buffer num: 10[0m
+[0;32mI (972) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (972) wifi_init: rx ba win: 6[0m
+[0;32mI (982) wifi_init: accept mbox: 6[0m
+[0;32mI (982) wifi_init: tcpip mbox: 32[0m
+[0;32mI (982) wifi_init: udp mbox: 6[0m
+[0;32mI (992) wifi_init: tcp mbox: 6[0m
+[0;32mI (992) wifi_init: tcp tx win: 5760[0m
+[0;32mI (992) wifi_init: tcp rx win: 5760[0m
+[0;32mI (992) wifi_init: tcp mss: 1440[0m
+[0;32mI (1002) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1002) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1012) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10[0m
+[0;32mI (1052) wifi:mode : sta (94:a9:90:1c:70:9c)[0m
+[0;32mI (1052) wifi:enable tsf[0m
+[0;32mI (1052) time_fetcher: WiFi STA mode initialized, connecting...[0m
+[0;32mI (1062) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1072) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1102) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (1142) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (1162) wifi:connected with 431, aid = 2, channel 6, BW20, bssid = 3c:cd:57:f9:76:82[0m
+[0;32mI (1162) wifi:security: WPA2-PSK, phy: bgn, rssi: -34, cipher(pairwise:0x3, group:0x3), pmf:0[0m
+[0;32mI (1172) wifi:pm start, type: 1[0m
+
+[0;32mI (1172) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (1182) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (1192) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (1382) wifi:<ba-add>idx:0 (ifx:0, 3c:cd:57:f9:76:82), tid:7, ssn:0, winSize:64[0m
+[0;32mI (2412) esp_netif_handlers: sta ip: 10.1.41.140, mask: 255.255.255.0, gw: 10.1.41.254[0m
+[0;32mI (2412) time_fetcher: Got IP: 10.1.41.140[0m
+[0;32mI (2412) time_fetcher: Configuring SNTP...[0m
+[0;32mI (2412) time_fetcher: SNTP configured, time will be synced automatically[0m
+[0;32mI (2422) time_fetcher: Connected to AP SSID:'431'[0m
+[0;32mI (2422) audio_capture: I2S PDM microphone initialized[0m
+[0;32mI (2432) http_server: Starting HTTP server...[0m
+[0;32mI (2432) http_server: HTTP server started. Access http://10.1.41.140/[0m
+[0;32mI (2442) audio_capture: Audio capture task started[0m
+[0;32mI (2442) audio_capture: HTTP send task started[0m
+[0;32mI (2442) time_fetcher: Print timer started (10s interval)[0m
+[0;32mI (2482) audio_capture: HTTP client initialized[0m
+[0;32mI (2492) wifi:<ba-add>idx:1 (ifx:0, 3c:cd:57:f9:76:82), tid:0, ssn:1, winSize:64[0m
+[1;31mE (2582) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (2582) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (2582) HTTP_CLIENT: Error write request[0m
+[0;32mI (2632) audio_capture: HTTP client initialized[0m
+[1;31mE (2732) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (2732) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (2732) HTTP_CLIENT: Error write request[0m
+[0;32mI (2782) audio_capture: HTTP client initialized[0m
+[1;31mE (2882) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (2882) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (2882) HTTP_CLIENT: Error write request[0m
+[0;32mI (2932) audio_capture: HTTP client initialized[0m
+[1;31mE (3032) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3032) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3032) HTTP_CLIENT: Error write request[0m
+[0;32mI (3082) audio_capture: HTTP client initialized[0m
+[1;31mE (3182) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3182) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3182) HTTP_CLIENT: Error write request[0m
+[0;32mI (3232) audio_capture: HTTP client initialized[0m
+[1;31mE (3332) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3332) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3332) HTTP_CLIENT: Error write request[0m
+[0;32mI (3382) audio_capture: HTTP client initialized[0m
+[1;31mE (3482) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3482) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3482) HTTP_CLIENT: Error write request[0m
+[0;32mI (3532) audio_capture: HTTP client initialized[0m
+[1;31mE (3632) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3632) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3632) HTTP_CLIENT: Error write request[0m
+[0;32mI (3682) audio_capture: HTTP client initialized[0m
+[1;31mE (3782) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3782) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3782) HTTP_CLIENT: Error write request[0m
+[0;32mI (3832) audio_capture: HTTP client initialized[0m
+[1;31mE (3932) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3932) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3932) HTTP_CLIENT: Error write request[0m
+[0;32mI (3982) audio_capture: HTTP client initialized[0m
+[1;31mE (4082) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (4082) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (4082) HTTP_CLIENT: Error write request[0m
+[0;32mI (4132) audio_capture: HTTP client initialized[0m
+[1;31mE (4232) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (4232) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (4232) HTTP_CLIENT: Error write request[0m
+[0;32mI (4282) audio_capture: HTTP client initialized[0m
+[1;31mE (4382) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (4382) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (4382) HTTP_CLIENT: Error write request[0m
+[0;32mI (4432) audio_capture: HTTP client initialized[0m
+[1;31mE (4532) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (4532) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (4532) HTTP_CLIENT: Error write request[0m
+[0;32mI (4582) audio_capture: HTTP client initialized[0m
+[1;31mE (4682) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (4682) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (4682) HTTP_CLIENT: Error write request[0m
+[0;32mI (4732) audio_capture: HTTP client initialized[0m
+[1;31mE (4832) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (4832) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (4832) HTTP_CLIENT: Error write request[0m
+[0;32mI (4882) audio_capture: HTTP client initialized[0m
+[1;31mE (4982) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (4982) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (4982) HTTP_CLIENT: Error write request[0m
+[0;32mI (5032) audio_capture: HTTP client initialized[0m
+[1;31mE (5132) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (5132) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (5132) HTTP_CLIENT: Error write request[0m
+[0;32mI (5182) audio_capture: HTTP client initialized[0m
+[1;31mE (5282) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (5282) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (5282) HTTP_CLIENT: Error write request[0m
+[0;32mI (5332) audio_capture: HTTP client initialized[0m
+[1;31mE (5432) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (5432) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (5432) HTTP_CLIENT: Error write request[0m
+[0;32mI (5482) audio_capture: HTTP client initialized[0m
+[1;31mE (5582) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (5582) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (5582) HTTP_CLIENT: Error write request[0m
+[0;32mI (5632) audio_capture: HTTP client initialized[0m
+[1;31mE (5732) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (5732) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (5732) HTTP_CLIENT: Error write request[0m
+[0;32mI (5782) audio_capture: HTTP client initialized[0m
+[1;31mE (5882) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (5882) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (5882) HTTP_CLIENT: Error write request[0m
+[0;32mI (5932) audio_capture: HTTP client initialized[0m
+[1;31mE (6032) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6032) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6032) HTTP_CLIENT: Error write request[0m
+[0;32mI (6082) audio_capture: HTTP client initialized[0m
+[1;31mE (6182) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6182) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6182) HTTP_CLIENT: Error write request[0m
+[0;32mI (6232) audio_capture: HTTP client initialized[0m
+[1;31mE (6332) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6332) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6332) HTTP_CLIENT: Error write request[0m
+[0;32mI (6382) audio_capture: HTTP client initialized[0m
+[1;31mE (6482) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6482) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6482) HTTP_CLIENT: Error write request[0m
+[0;32mI (6532) audio_capture: HTTP client initialized[0m
+[1;31mE (6632) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6632) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6632) HTTP_CLIENT: Error write request[0m
+[0;32mI (6682) audio_capture: HTTP client initialized[0m
+[1;31mE (6782) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6782) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6782) HTTP_CLIENT: Error write request[0m
+[0;32mI (6832) audio_capture: HTTP client initialized[0m
+[1;31mE (6932) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6932) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6932) HTTP_CLIENT: Error write request[0m
+[0;32mI (6982) audio_capture: HTTP client initialized[0m
+[1;31mE (7082) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (7082) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (7082) HTTP_CLIENT: Error write request[0m
+[0;32mI (7132) audio_capture: HTTP client initialized[0m
+[1;31mE (7232) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (7232) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (7232) HTTP_CLIENT: Error write request[0m
+[0;32mI (7282) audio_capture: HTTP client initialized[0m
+[1;31mE (7382) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (7382) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (7382) HTTP_CLIENT: Error write request[0m
+[0;32mI (7432) audio_capture: HTTP client initialized[0m
+[1;31mE (7532) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (7532) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (7532) HTTP_CLIENT: Error write request[0m
+[0;32mI (7582) audio_capture: HTTP client initialized[0m
+[1;31mE (7682) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (7682) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (7682) HTTP_CLIENT: Error write request[0m
+[0;32mI (7732) audio_capture: HTTP client initialized[0m
+[1;31mE (7832) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (7832) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (7832) HTTP_CLIENT: Error write request[0m
+[0;32mI (7882) audio_capture: HTTP client initialized[0m
+[1;31mE (7982) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (7982) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (7982) HTTP_CLIENT: Error write request[0m
+[0;32mI (8032) audio_capture: HTTP client initialized[0m
+[1;31mE (8132) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (8132) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (8132) HTTP_CLIENT: Error write request[0m
+[0;32mI (8182) audio_capture: HTTP client initialized[0m
+[1;31mE (8282) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (8282) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (8282) HTTP_CLIENT: Error write request[0m
+[0;32mI (8332) audio_capture: HTTP client initialized[0m
+[1;31mE (8432) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (8432) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (8432) HTTP_CLIENT: Error write request[0m
+[0;32mI (8482) audio_capture: HTTP client initialized[0m
+[1;31mE (8582) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (8582) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (8582) HTTP_CLIENT: Error write request[0m
+[0;32mI (8632) audio_capture: HTTP client initialized[0m
+[1;31mE (8732) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (8732) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (8732) HTTP_CLIENT: Error write request[0m
+[0;32mI (8782) audio_capture: HTTP client initialized[0m
+[1;31mE (8882) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (8882) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (8882) HTTP_CLIENT: Error write request[0m
+[0;32mI (8932) audio_capture: HTTP client initialized[0m
+[1;31mE (9032) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (9032) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (9032) HTTP_CLIENT: Error write request[0m
+[0;32mI (9082) audio_capture: HTTP client initialized[0m
+[1;31mE (9182) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (9182) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (9182) HTTP_CLIENT: Error write request[0m
+[0;32mI (9232) audio_capture: HTTP client initialized[0m
+[1;31mE (9332) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (9332) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (9332) HTTP_CLIENT: Error write request[0m
+[0;32mI (9382) audio_capture: HTTP client initialized[0m
+[1;31mE (9482) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (9482) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (9482) HTTP_CLIENT: Error write request[0m
+[0;32mI (9532) audio_capture: HTTP client initialized[0m
+[1;31mE (9632) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (9632) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (9632) HTTP_CLIENT: Error write request[0m
+[0;32mI (9682) audio_capture: HTTP client initialized[0m
+[1;31mE (9782) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (9782) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (9782) HTTP_CLIENT: Error write request[0m
+[0;32mI (9832) audio_capture: HTTP client initialized[0m
+[1;31mE (9932) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (9932) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (9932) HTTP_CLIENT: Error write request[0m
+[0;32mI (9982) audio_capture: HTTP client initialized[0m
+[1;31mE (10082) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (10082) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (10082) HTTP_CLIENT: Error write request[0m
+[0;32mI (10132) audio_capture: HTTP client initialized[0m
+[1;31mE (10232) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (10232) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (10232) HTTP_CLIENT: Error write request[0m
+[0;32mI (10282) audio_capture: HTTP client initialized[0m
+[1;31mE (10382) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (10382) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (10382) HTTP_CLIENT: Error write request[0m
+[0;32mI (10432) audio_capture: HTTP client initialized[0m
+[1;31mE (10532) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (10532) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (10532) HTTP_CLIENT: Error write request[0m
+[0;32mI (10582) audio_capture: HTTP client initialized[0m
+[1;31mE (10682) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (10682) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (10682) HTTP_CLIENT: Error write request[0m
+[0;32mI (10732) audio_capture: HTTP client initialized[0m
+[1;31mE (10832) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (10832) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (10832) HTTP_CLIENT: Error write request[0m
+[0;32mI (10882) audio_capture: HTTP client initialized[0m
+[1;31mE (10982) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (10982) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (10982) HTTP_CLIENT: Error write request[0m
+[0;32mI (11032) audio_capture: HTTP client initialized[0m
+[1;31mE (11132) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (11132) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (11132) HTTP_CLIENT: Error write request[0m
+[0;32mI (11182) audio_capture: HTTP client initialized[0m
+[1;31mE (11282) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (11282) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (11282) HTTP_CLIENT: Error write request[0m
+[0;32mI (11332) audio_capture: HTTP client initialized[0m
+[1;31mE (11432) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (11432) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (11432) HTTP_CLIENT: Error write request[0m
+[0;32mI (11482) audio_capture: HTTP client initialized[0m
+[1;31mE (11582) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (11582) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (11582) HTTP_CLIENT: Error write request[0m
+[0;32mI (11632) audio_capture: HTTP client initialized[0m
+[1;31mE (11732) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (11732) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (11732) HTTP_CLIENT: Error write request[0m
+[0;32mI (11782) audio_capture: HTTP client initialized[0m
+[1;31mE (11882) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (11882) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (11882) HTTP_CLIENT: Error write request[0m
+[0;32mI (11932) audio_capture: HTTP client initialized[0m
+[1;31mE (12032) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (12032) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (12032) HTTP_CLIENT: Error write request[0m
+[0;32mI (12082) audio_capture: HTTP client initialized[0m
+[1;31mE (12182) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (12182) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (12182) HTTP_CLIENT: Error write request[0m
+[0;32mI (12232) audio_capture: HTTP client initialized[0m
+[1;31mE (12332) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (12332) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (12332) HTTP_CLIENT: Error write request[0m
+[0;32mI (12382) audio_capture: HTTP client initialized[0m
+[0;32mI (12442) time_fetcher: time_fetcher: time: Wed May 13 12:35:30 [0m
+***ERROR*** A stack overflow in task Tmr Svc has been detected.
+
+
+Backtrace: 0x40375f0d:0x3fcabc60 0x4037e54d:0x3fcabc80 0x4037f472:0x3fcabca0 0x40380e47:0x3fcabd20 0x4037f538:0x3fcabd40 0x4037f52e:0x00000000 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 9eee3b354
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x2a (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375e4d
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2810,len:0x1564
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xd24
+load:0x403cb700,len:0x2ed4
+entry 0x403c8928
+[0;32mI (26) boot: ESP-IDF v5.4.4 2nd stage bootloader[0m
+[0;32mI (26) boot: compile time May 13 2026 10:54:14[0m
+[0;32mI (26) boot: Multicore bootloader[0m
+[0;32mI (27) boot: chip revision: v0.2[0m
+[0;32mI (29) boot: efuse block revision: v1.3[0m
+[0;32mI (33) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (37) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (40) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (44) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (51) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (64) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (77) boot: End of partition table[0m
+[0;32mI (80) esp_image: segment 0: paddr=00010020 vaddr=3c0b0020 size=226fch (141052) map[0m
+[0;32mI (113) esp_image: segment 1: paddr=00032724 vaddr=3fc9c500 size=05644h ( 22084) load[0m
+[0;32mI (118) esp_image: segment 2: paddr=00037d70 vaddr=40374000 size=082a8h ( 33448) load[0m
+[0;32mI (125) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=a846ch (689260) map[0m
+[0;32mI (247) esp_image: segment 4: paddr=000e8494 vaddr=4037c2a8 size=1015ch ( 65884) load[0m
+[0;32mI (262) esp_image: segment 5: paddr=000f85f8 vaddr=50000000 size=0001ch (    28) load[0m
+[0;32mI (272) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (272) boot: Disabling RNG early entropy source...[0m
+[0;32mI (282) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (282) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (282) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (284) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (289) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (293) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (297) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (302) octal_psram: BurstType    : 0x01 (Hybrid Wrap)[0m
+[0;32mI (307) octal_psram: BurstLen     : 0x01 (32 Byte)[0m
+[0;32mI (311) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (317) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (321) MSPI Timing: PSRAM timing tuning index: 5[0m
+[0;32mI (325) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (329) esp_psram: Speed: 80MHz[0m
+[0;32mI (332) cpu_start: Multicore app[0m
+[0;32mI (767) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (776) cpu_start: GPIO 44 and 43 are used as console UART I/O pins[0m
+[0;32mI (777) cpu_start: Pro cpu start user code[0m
+[0;32mI (777) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (778) app_init: Application information:[0m
+[0;32mI (782) app_init: Project name:     wifi_time_reporter[0m
+[0;32mI (787) app_init: App version:      1.0.0[0m
+[0;32mI (790) app_init: Compile time:     May 13 2026 12:34:30[0m
+[0;32mI (795) app_init: ELF file SHA256:  9eee3b354...[0m
+[0;32mI (800) app_init: ESP-IDF:          v5.4.4[0m
+[0;32mI (804) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (807) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (811) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (815) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (822) heap_init: At 3FCA7120 len 000425F0 (265 KiB): RAM[0m
+[0;32mI (827) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (832) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (837) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (843) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (850) spi_flash: detected chip: generic[0m
+[0;32mI (853) spi_flash: flash io: dio[0m
+[0;33mW (856) spi_flash: Detected size(8192k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (868) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (874) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (881) main_task: Started on CPU0[0m
+[0;32mI (891) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (891) main_task: Calling app_main()[0m
+[0;32mI (911) time_fetcher: ESP32-S3-EYE WiFi Voice Reporter started[0m
+[0;32mI (911) time_fetcher: Board: ESP32-S3-EYE[0m
+[0;32mI (911) pp: pp rom version: e7ae62f[0m
+[0;32mI (911) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (931) wifi:wifi driver task: 3fcb9cb0, prio:23, stack:6656, core=0[0m
+[0;32mI (941) wifi:wifi firmware version: 8896d66[0m
+[0;32mI (941) wifi:wifi certification version: v7.0[0m
+[0;32mI (941) wifi:config NVS flash: enabled[0m
+[0;32mI (941) wifi:config nano formatting: disabled[0m
+[0;32mI (941) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (951) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (951) wifi:Init management short buffer num: 32[0m
+[0;32mI (951) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (961) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (961) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (971) wifi:Init static rx buffer num: 10[0m
+[0;32mI (971) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (971) wifi_init: rx ba win: 6[0m
+[0;32mI (981) wifi_init: accept mbox: 6[0m
+[0;32mI (981) wifi_init: tcpip mbox: 32[0m
+[0;32mI (981) wifi_init: udp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp mbox: 6[0m
+[0;32mI (991) wifi_init: tcp tx win: 5760[0m
+[0;32mI (991) wifi_init: tcp rx win: 5760[0m
+[0;32mI (991) wifi_init: tcp mss: 1440[0m
+[0;32mI (1001) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1001) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1011) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10[0m
+[0;32mI (1051) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)[0m
+[0;32mI (1091) wifi:mode : sta (94:a9:90:1c:70:9c)[0m
+[0;32mI (1091) wifi:enable tsf[0m
+[0;32mI (1101) time_fetcher: WiFi STA mode initialized, connecting...[0m
+[0;32mI (1111) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1111) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1131) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (1181) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (1201) wifi:connected with 431, aid = 2, channel 6, BW20, bssid = 3c:cd:57:f9:76:82[0m
+[0;32mI (1201) wifi:security: WPA2-PSK, phy: bgn, rssi: -34, cipher(pairwise:0x3, group:0x3), pmf:0[0m
+[0;32mI (1211) wifi:pm start, type: 1[0m
+
+[0;32mI (1211) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (1221) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (1251) wifi:<ba-add>idx:0 (ifx:0, 3c:cd:57:f9:76:82), tid:7, ssn:0, winSize:64[0m
+[0;32mI (1291) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (2281) esp_netif_handlers: sta ip: 10.1.41.140, mask: 255.255.255.0, gw: 10.1.41.254[0m
+[0;32mI (2281) time_fetcher: Got IP: 10.1.41.140[0m
+[0;32mI (2281) time_fetcher: Configuring SNTP...[0m
+[0;32mI (2281) time_fetcher: SNTP configured, time will be synced automatically[0m
+[0;32mI (2291) time_fetcher: Connected to AP SSID:'431'[0m
+[0;32mI (2291) audio_capture: I2S PDM microphone initialized[0m
+[0;32mI (2301) http_server: Starting HTTP server...[0m
+[0;32mI (2301) http_server: HTTP server started. Access http://10.1.41.140/[0m
+[0;32mI (2311) audio_capture: Audio capture task started[0m
+[0;32mI (2311) audio_capture: HTTP send task started[0m
+[0;32mI (2311) time_fetcher: Print timer started (10s interval)[0m
+[0;32mI (2351) audio_capture: HTTP client initialized[0m
+[0;32mI (2361) wifi:<ba-add>idx:1 (ifx:0, 3c:cd:57:f9:76:82), tid:0, ssn:1, winSize:64[0m
+[1;31mE (2451) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (2451) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (2451) HTTP_CLIENT: Error write request[0m
+[0;32mI (2501) audio_capture: HTTP client initialized[0m
+[1;31mE (2601) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (2601) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (2601) HTTP_CLIENT: Error write request[0m
+[0;32mI (2651) audio_capture: HTTP client initialized[0m
+[1;31mE (2751) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (2751) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (2751) HTTP_CLIENT: Error write request[0m
+[0;32mI (2801) audio_capture: HTTP client initialized[0m
+[1;31mE (2901) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (2901) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (2901) HTTP_CLIENT: Error write request[0m
+[0;32mI (2951) audio_capture: HTTP client initialized[0m
+[1;31mE (3051) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3051) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3051) HTTP_CLIENT: Error write request[0m
+[0;32mI (3101) audio_capture: HTTP client initialized[0m
+[1;31mE (3201) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3201) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3201) HTTP_CLIENT: Error write request[0m
+[0;32mI (3251) audio_capture: HTTP client initialized[0m
+[1;31mE (3351) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3351) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3351) HTTP_CLIENT: Error write request[0m
+[0;32mI (3401) audio_capture: HTTP client initialized[0m
+[1;31mE (3501) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3501) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3501) HTTP_CLIENT: Error write request[0m
+[0;32mI (3551) audio_capture: HTTP client initialized[0m
+[1;31mE (3651) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3651) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3651) HTTP_CLIENT: Error write request[0m
+[0;32mI (3701) audio_capture: HTTP client initialized[0m
+[1;31mE (3801) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3801) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3801) HTTP_CLIENT: Error write request[0m
+[0;32mI (3851) audio_capture: HTTP client initialized[0m
+[1;31mE (3951) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (3951) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (3951) HTTP_CLIENT: Error write request[0m
+[0;32mI (4001) audio_capture: HTTP client initialized[0m
+[1;31mE (4101) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (4101) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (4101) HTTP_CLIENT: Error write request[0m
+[0;32mI (4151) audio_capture: HTTP client initialized[0m
+[1;31mE (4251) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (4251) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (4251) HTTP_CLIENT: Error write request[0m
+[0;32mI (4301) audio_capture: HTTP client initialized[0m
+[1;31mE (4401) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (4401) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (4401) HTTP_CLIENT: Error write request[0m
+[0;32mI (4451) audio_capture: HTTP client initialized[0m
+[1;31mE (4551) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (4551) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (4551) HTTP_CLIENT: Error write request[0m
+[0;32mI (4601) audio_capture: HTTP client initialized[0m
+[1;31mE (4701) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (4701) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (4701) HTTP_CLIENT: Error write request[0m
+[0;32mI (4751) audio_capture: HTTP client initialized[0m
+[1;31mE (4851) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (4851) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (4851) HTTP_CLIENT: Error write request[0m
+[0;32mI (4901) audio_capture: HTTP client initialized[0m
+[1;31mE (5001) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (5001) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (5001) HTTP_CLIENT: Error write request[0m
+[0;32mI (5051) audio_capture: HTTP client initialized[0m
+[1;31mE (5151) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (5151) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (5151) HTTP_CLIENT: Error write request[0m
+[0;32mI (5201) audio_capture: HTTP client initialized[0m
+[1;31mE (5301) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (5301) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (5301) HTTP_CLIENT: Error write request[0m
+[0;32mI (5351) audio_capture: HTTP client initialized[0m
+[1;31mE (5451) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (5451) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (5451) HTTP_CLIENT: Error write request[0m
+[0;32mI (5501) audio_capture: HTTP client initialized[0m
+[1;31mE (5601) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (5601) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (5601) HTTP_CLIENT: Error write request[0m
+[0;32mI (5651) audio_capture: HTTP client initialized[0m
+[1;31mE (5751) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (5751) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (5751) HTTP_CLIENT: Error write request[0m
+[0;32mI (5801) audio_capture: HTTP client initialized[0m
+[1;31mE (5901) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (5901) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (5901) HTTP_CLIENT: Error write request[0m
+[0;32mI (5951) audio_capture: HTTP client initialized[0m
+[1;31mE (6051) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6051) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6051) HTTP_CLIENT: Error write request[0m
+[0;32mI (6101) audio_capture: HTTP client initialized[0m
+[1;31mE (6201) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6201) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6201) HTTP_CLIENT: Error write request[0m
+[0;32mI (6251) audio_capture: HTTP client initialized[0m
+[1;31mE (6351) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6351) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6351) HTTP_CLIENT: Error write request[0m
+[0;32mI (6401) audio_capture: HTTP client initialized[0m
+[1;31mE (6501) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6501) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6501) HTTP_CLIENT: Error write request[0m
+[0;32mI (6551) audio_capture: HTTP client initialized[0m
+[1;31mE (6651) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6651) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6651) HTTP_CLIENT: Error write request[0m
+[0;32mI (6701) audio_capture: HTTP client initialized[0m
+[1;31mE (6801) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6801) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6801) HTTP_CLIENT: Error write request[0m
+[0;32mI (6851) audio_capture: HTTP client initialized[0m
+[1;31mE (6951) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (6951) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (6951) HTTP_CLIENT: Error write request[0m
+[0;32mI (7001) audio_capture: HTTP client initialized[0m
+[1;31mE (7101) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (7101) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (7101) HTTP_CLIENT: Error write request[0m
+[0;32mI (7151) audio_capture: HTTP client initialized[0m
+[1;31mE (7251) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (7251) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (7251) HTTP_CLIENT: Error write request[0m
+[0;32mI (7301) audio_capture: HTTP client initialized[0m
+[1;31mE (7401) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (7401) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (7401) HTTP_CLIENT: Error write request[0m
+[0;32mI (7451) audio_capture: HTTP client initialized[0m
+[1;31mE (7551) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (7551) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (7551) HTTP_CLIENT: Error write request[0m
+[0;32mI (7601) audio_capture: HTTP client initialized[0m
+[1;31mE (7701) transport_base: poll_write select error 104, errno = Connection reset by peer, fd = 57[0m
+[0;33mW (7701) transport_base: Poll timeout or error, errno=Socket is not connected, fd=57, timeout_ms=3000[0m
+[1;31mE (7701) HTTP_CLIENT: Error write request[0m
+[0;32mI (7751) audio_capture: HTTP client initialized[0m

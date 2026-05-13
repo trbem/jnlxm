@@ -53,8 +53,15 @@ static httpd_handle_t server = NULL;
 /* 音频配置 */
 #define AUDIO_SAMPLE_RATE 16000
 #define AUDIO_BYTE_RATE (AUDIO_SAMPLE_RATE * 2)  // 16-bit mono
-#define AUDIO_BUFFER_SIZE 1600  // 50ms of audio data (减少栈使用)
+#define AUDIO_BUFFER_SIZE 1600  // 50ms of audio data
 #define AUDIO_SEND_INTERVAL_MS 50
+
+/* HTTP发送队列配置 */
+#define AUDIO_SEND_QUEUE_SIZE 4
+typedef struct {
+    uint8_t *data;
+    size_t length;
+} audio_packet_t;
 
 /* PC语音识别服务器地址 (端口8087) */
 #define VOICE_SERVER_URL "http://19.1.41.99:8087/voice"
@@ -262,7 +269,10 @@ static esp_err_t send_audio_to_server(uint8_t *data, size_t length)
     return ESP_OK;
 }
 
-/* I2S音频采集任务 */
+/* 音频采集队列句柄 */
+static QueueHandle_t s_audio_queue = NULL;
+
+/* I2S音频采集任务 - 只负责采集和入队 */
 static void audio_capture_task(void *pvParameters)
 {
     size_t bytes_read;
@@ -281,15 +291,21 @@ static void audio_capture_task(void *pvParameters)
     while (1) {
         /* 读取音频数据 */
         if (i2s_channel_read(i2s_rx_handle, (char *)audio_buffer, AUDIO_BUFFER_SIZE, &bytes_read, 1000) == ESP_OK) {
-            /* 发送音频数据到PC */
-            if (send_audio_to_server((uint8_t *)audio_buffer, bytes_read) != ESP_OK) {
-                consecutive_failures++;
-                ESP_LOGW(AUDIO_TAG, "Send failed (%d)", consecutive_failures);
-                if (consecutive_failures >= 5) {
-                    vTaskDelay(pdMS_TO_TICKS(500));
+            /* 将数据放入队列 - 不等待，直接发送 */
+            audio_packet_t *packet = (audio_packet_t *)malloc(sizeof(audio_packet_t));
+            if (packet != NULL) {
+                packet->data = (uint8_t *)malloc(bytes_read);
+                if (packet->data != NULL) {
+                    memcpy(packet->data, audio_buffer, bytes_read);
+                    packet->length = bytes_read;
+                    /* 非阻塞发送 */
+                    if (xQueueSend(s_audio_queue, &packet, 0) != pdTRUE) {
+                        free(packet->data);
+                        free(packet);
+                    }
+                } else {
+                    free(packet);
                 }
-            } else {
-                consecutive_failures = 0;
             }
         } else {
             ESP_LOGW(AUDIO_TAG, "I2S read failed");
@@ -299,6 +315,60 @@ static void audio_capture_task(void *pvParameters)
     }
     
     free(audio_buffer);
+}
+
+/* HTTP音频发送任务 - 负责网络通信 */
+static void audio_http_send_task(void *pvParameters)
+{
+    audio_packet_t *packet = NULL;
+    static esp_http_client_handle_t client = NULL;
+    static int init_done = 0;
+    
+    ESP_LOGI(AUDIO_TAG, "HTTP send task started");
+    
+    while (1) {
+        /* 从队列获取音频数据包 */
+        if (xQueueReceive(s_audio_queue, &packet, pdMS_TO_TICKS(100))) {
+            if (packet == NULL) {
+                continue;
+            }
+            
+            /* 初始化HTTP客户端(仅第一次) */
+            if (!init_done) {
+                esp_http_client_config_t config = {
+                    .url = VOICE_SERVER_URL,
+                    .method = HTTP_METHOD_POST,
+                    .timeout_ms = 3000,
+                };
+                client = esp_http_client_init(&config);
+                if (client) {
+                    init_done = 1;
+                    ESP_LOGI(AUDIO_TAG, "HTTP client initialized");
+                }
+            }
+            
+            /* 发送音频数据 */
+            if (client != NULL && init_done) {
+                esp_err_t err = esp_http_client_open(client, packet->length);
+                if (err == ESP_OK) {
+                    int written = esp_http_client_write(client, (char *)packet->data, packet->length);
+                    if (written > 0) {
+                        esp_http_client_fetch_headers(client);
+                    } else {
+                        esp_http_client_cleanup(client);
+                        init_done = 0;
+                    }
+                } else {
+                    esp_http_client_cleanup(client);
+                    init_done = 0;
+                }
+            }
+            
+            /* 释放数据包内存 */
+            free(packet->data);
+            free(packet);
+        }
+    }
 }
 
 /* HTTP根路径处理器 - 返回HTML网页 */
@@ -568,8 +638,19 @@ void app_main(void)
     /* 启动HTTP服务器 */
     start_http_server();
     
-    /* 创建音频采集任务 (栈空间16384字节，解决esp_http_client栈溢出) */
-    xTaskCreate(audio_capture_task, "audio_capture", 16384, NULL, 5, NULL);
+    /* 创建音频采集队列 */
+    s_audio_queue = xQueueCreate(AUDIO_SEND_QUEUE_SIZE, sizeof(audio_packet_t *));
+    if (s_audio_queue == NULL) {
+        ESP_LOGE(AUDIO_TAG, "Failed to create audio queue");
+    }
+    
+    /* 创建音频采集任务 (栈空间4096字节) */
+    xTaskCreate(audio_capture_task, "audio_capture", 4096, NULL, 5, NULL);
+    
+    /* 创建HTTP发送任务 (栈空间8192字节) */
+    if (s_audio_queue != NULL) {
+        xTaskCreate(audio_http_send_task, "audio_http_send", 8192, NULL, 4, NULL);
+    }
     
     /* 创建定期打印时间定时器 (每10秒) */
     TimerHandle_t print_timer = xTimerCreate("print_timer",
